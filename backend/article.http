@@ -30,8 +30,8 @@ Content-Type: application/json
 }
 ###
 
-POST http://localhost:3000/article/new
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiOWVkNmQ4OS1jODA4LTQxODAtOTAxOS0yODVkMzQyMTNlOWQiLCJpYXQiOjE2ODkwMzU4MDksImV4cCI6MTY4OTAzOTQwOX0.cwyBUPmHuDLWVDgy3Hz2JUHo2f91ws7aKGx-bVkT4pk
+POST http://localhost:3000/article/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiOWVkNmQ4OS1jODA4LTQxODAtOTAxOS0yODVkMzQyMTNlOWQiLCJpYXQiOjE2ODkyNjUwNjYsImV4cCI6MTY4OTI2ODY2Nn0.fAviDxKu47onpQ43u6OFlwJW_uzxFXNQRdhHMs_E1VQ
 Content-Type: application/json
 
 {
@@ -54,10 +54,6 @@ Content-Type: application/json
   "content": "teste"
 }
 ###
-GET http://localhost:3000/view/all?take=1&skip=1
-###
-GET http://localhost:3000/view/all?take=3&skip=1
-###
 POST http://localhost:3000/comment/c3be6e01-af92-461c-9c1a-74e8f5c3d347
 Content-Type: application/json
 
@@ -66,7 +62,7 @@ Content-Type: application/json
   "author": "ChatGPT"
 }
 ###
-GET http://localhost:3000/view/by/8febf529-38b4-4533-b8bf-c40d6a10ddb3
+GET http://localhost:3000/article/read/8febf529-38b4-4533-b8bf-c40d6a10ddb3
 
 
 ###

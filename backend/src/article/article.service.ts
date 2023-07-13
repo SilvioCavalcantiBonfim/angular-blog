@@ -52,22 +52,24 @@ export class ArticleService {
       data: {
         title: article.title || CurrentArticle.title,
         content: article.content || CurrentArticle.content,
-        thumb: article.thumb || CurrentArticle.thumb
+        thumb: article.thumb || CurrentArticle.thumb,
       },
     });
   }
 
   async delete(id_article: string, id: string) {
     await this.manipulateArticle(id_article, id);
-    const current_article = await this.prismaService.article.findUnique({ 
+    const current_article = await this.prismaService.article.findUnique({
       where: { id: id_article },
-      select: { comments: true, id: true }
+      select: { comments: true, id: true },
     });
 
-    current_article.comments.forEach(async e => {
-      await this.prismaService.comment.delete({ where: {id: e.id} });
+    current_article.comments.forEach(async (e) => {
+      await this.prismaService.comment.delete({ where: { id: e.id } });
     });
-    await this.prismaService.article.delete({ where: { id: current_article.id } });
+    await this.prismaService.article.delete({
+      where: { id: current_article.id },
+    });
   }
 
   async create(article: ArticleDto, author_id: string) {
@@ -76,7 +78,104 @@ export class ArticleService {
         title: article.title,
         content: article.content,
         author_id,
-        thumb: article.thumb
+        thumb: article.thumb,
+      },
+    });
+  }
+
+  async findArticleById(id: string) {
+    try {
+      return await this.prismaService.article.findUniqueOrThrow({
+        where: {
+          id: id,
+        },
+        select: {
+          title: true,
+          content: true,
+          created_at: true,
+          updated_at: true,
+          comments: {
+            select: {
+              id: true,
+              article_id: true,
+              content: true,
+              author: true,
+              created_at: true,
+            },
+          },
+          Author: {
+            select: {
+              id: false,
+              password: false,
+              email: false,
+              full_name: true,
+            },
+          },
+        },
+      });
+    } catch (error) {
+      throw new NotFoundException();
+    }
+  }
+  async findSearch(search: string) {
+    return await this.prismaService.article.findMany({
+      orderBy: {
+        created_at: 'desc',
+      },
+      where: {
+        title: {
+          contains: search,
+        },
+      },
+      select: {
+        content: false,
+        id: true,
+        title: true,
+        created_at: true,
+        updated_at: true,
+        comments: true,
+        thumb: true,
+        Author: {
+          select: {
+            id: false,
+            password: false,
+            email: true,
+            full_name: true,
+          },
+        },
+      },
+    });
+  }
+  async findAll(skip: number, take?: number) {
+    const totalRegister = await this.prismaService.article.count();
+    let CurrentTake: number | undefined;
+    if (take && totalRegister < take + skip) {
+      CurrentTake = undefined;
+    } else {
+      CurrentTake = take;
+    }
+    return await this.prismaService.article.findMany({
+      orderBy: {
+        created_at: 'desc',
+      },
+      skip: skip,
+      take: CurrentTake,
+      select: {
+        content: false,
+        id: true,
+        title: true,
+        created_at: true,
+        updated_at: true,
+        comments: true,
+        thumb: true,
+        Author: {
+          select: {
+            id: false,
+            password: false,
+            email: true,
+            full_name: true,
+          },
+        },
       },
     });
   }

@@ -12,18 +12,19 @@ datasource db {
 
 //configurações
 model Setting {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
   title String
   subtitle String
   carousel_time Int
   carousel_amount Int
+  articles_per_page Int
   Theme Theme @relation(fields: [theme_id], references: [id])
-  theme_id String
+  theme_id Int
 }
 
 //temas
 model Theme {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
   color1 String
   color2 String
   settings Setting[]

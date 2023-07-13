@@ -1,0 +1,8 @@
+###
+GET http://localhost:3000/settings
+
+###
+GET http://localhost:3000/article/read/all
+
+###
+GET http://localhost:3000/article/read/8ad5759d-e6a5-4d73-a5fa-6769ad3105ad

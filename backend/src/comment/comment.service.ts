@@ -3,7 +3,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import CommentDto from './comment.dto';
 
 @Injectable()
-export class CommentsService {
+export class CommentService {
   constructor(private readonly prismaService: PrismaService) {}
   async create(article_id: string, comment: CommentDto) {
     try {
@@ -25,7 +25,7 @@ export class CommentsService {
     return await this.prismaService.comment.delete({
       where: {
         id,
-      }
+      },
     });
   }
 }

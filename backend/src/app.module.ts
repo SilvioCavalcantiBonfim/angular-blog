@@ -3,7 +3,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { ProfileModule } from './profile/profile.module';
 import { ArticleModule } from './article/article.module';
-import { CommentsModule } from './comments/comments.module';
+import { CommentModule } from './comment/comment.module';
 import { SettingsModule } from './settings/settings.module';
 
 @Module({
@@ -12,7 +12,7 @@ import { SettingsModule } from './settings/settings.module';
     AuthModule,
     ProfileModule,
     ArticleModule,
-    CommentsModule,
+    CommentModule,
     SettingsModule,
   ],
   controllers: [],

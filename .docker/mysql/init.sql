@@ -3,19 +3,20 @@ CREATE DATABASE IF NOT EXISTS blog CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode
 USE blog;
 
 CREATE TABLE `Setting` (
-    `id` VARCHAR(191) NOT NULL,
+    `id`  INTEGER NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(191) NOT NULL,
     `subtitle` VARCHAR(191) NOT NULL,
     `carousel_time` INTEGER NOT NULL,
     `carousel_amount` INTEGER NOT NULL,
-    `theme_id` VARCHAR(191) NOT NULL,
+    `theme_id`INTEGER NOT NULL,
+    `articles_per_page` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `Theme` (
-    `id` VARCHAR(191) NOT NULL,
+    `id`  INTEGER NOT NULL AUTO_INCREMENT,
     `color1` VARCHAR(191) NOT NULL,
     `color2` VARCHAR(191) NOT NULL,
 
@@ -69,16 +70,16 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 SET NAMES utf8mb4;
 
-INSERT INTO `Setting` (`id`, `title`, `subtitle`, `carousel_time`, `carousel_amount`, `theme_id`) VALUES
-('19c01481-1fec-11ee-b910-0242ac120002',	'Blog',	'',	5000,	3,	'f830a30a-1fea-11ee-b1dc-0242ac120002');
+INSERT INTO `Setting` (`id`, `title`, `subtitle`, `carousel_time`, `carousel_amount`, `theme_id`, `articles_per_page`) VALUES
+(1,	'Blog',	'',	5000,	3,	0,	4);
 
 INSERT INTO `Theme` (`id`, `color1`, `color2`) VALUES
-('4ca0d182-1fea-11ee-b1dc-0242ac120002',	'#f12711',	'#f5af19'),
-('5102070e-1feb-11ee-b1dc-0242ac120002',	'#f59e0b',	'#d27deb'),
-('68f465e2-1fea-11ee-b1dc-0242ac120002',	'#6f11a3',	'#f30284'),
-('773d8d3d-1fea-11ee-b1dc-0242ac120002',	'#aee958',	'#4fbc6e'),
-('82f49b10-1fea-11ee-b1dc-0242ac120002',	'#7fe8bc',	'#516ab8'),
-('f830a30a-1fea-11ee-b1dc-0242ac120002',	'#a855f7',	'#ec4899');
+(0, '#f12711',	'#f5af19'),
+(1, '#f59e0b',	'#d27deb'),
+(2, '#6f11a3',	'#f30284'),
+(3, '#aee958',	'#4fbc6e'),
+(4, '#7fe8bc',	'#516ab8'),
+(5, '#a855f7',	'#ec4899');
 
 INSERT INTO `User` (`id`, `full_name`, `password`, `email`) VALUES
 ('b9ed6d89-c808-4180-9019-285d34213e9d', 'Admin', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'admin@blog.com');
