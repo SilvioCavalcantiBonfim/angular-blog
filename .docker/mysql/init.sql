@@ -71,7 +71,7 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 SET NAMES utf8mb4;
 
 INSERT INTO `Setting` (`id`, `title`, `subtitle`, `carousel_time`, `carousel_amount`, `theme_id`, `articles_per_page`) VALUES
-(1,	'Blog',	'',	5000,	3,	0,	4);
+(0,	'Blog',	'',	5000,	3,	0,	4);
 
 INSERT INTO `Theme` (`id`, `color1`, `color2`) VALUES
 (0, '#f12711',	'#f5af19'),
