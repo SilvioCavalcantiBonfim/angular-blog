@@ -1,0 +1,26 @@
+<header class="select-none bg-white bg-opacity-70 drop-shadow-md">
+  <nav
+    class="mx-auto p-5 max-w-7xl px-4 sm:px-6 lg:px-8 grid grid-cols-1 items-center gap-y-4 md:grid-cols-2"
+  >
+    <div
+      class="justify-self-center px-2 md:justify-self-start items-center flex justify-center text-black text-opacity-80"
+    >
+      <app-logo [color]="setting?.Theme?.color1 || '#F88669'"/>
+      <svg height="45" [attr.width]="size | async" class="drop-shadow-md translate-x-[-20px]">
+        <style>
+          .heavy {
+            font: bold 28px sans-serif;
+          }
+        </style>
+        <g>
+          <text x="0" y="23" id="myElement" #title class="heavy drop-shadow-sm" [attr.fill]="setting?.Theme?.color2">{{setting?.title?.toUpperCase()}}</text>
+        </g>
+        <text x="0" y="40" #subtitle class="drop-shadow-sm font-semibold text-gray-900" fill="currentColor">{{setting?.subtitle}}</text>
+      </svg>
+    </div>
+    <div class="justify-self-center md:justify-self-end w-full md:w-1/2">
+      <ng-content select=".search"></ng-content>
+    </div>
+  </nav>
+  <ng-content select=".bottom"></ng-content>
+</header>

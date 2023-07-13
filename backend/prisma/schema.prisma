@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+//configurações
+model Setting {
+  id String @id @default(uuid())
+  title String
+  subtitle String
+  carousel_time Int
+  carousel_amount Int
+  Theme Theme @relation(fields: [theme_id], references: [id])
+  theme_id String
+}
+
+//temas
+model Theme {
+  id String @id @default(uuid())
+  color1 String
+  color2 String
+  settings Setting[]
+}
+
+// Artigos
+model Article {
+  id String @id @default(uuid())
+  title String
+  content String @db.LongText
+  Author User @relation(fields: [author_id], references: [id])
+  author_id String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt  
+  thumb String
+  comments Comment[]
+}
+
+// comentarios em um artigo
+model Comment{
+  id String @id @default(uuid())
+  article Article @relation(fields: [article_id], references: [id])
+  article_id String
+  content String @db.LongText
+  author String
+  created_at DateTime @default(now())
+}
+
+// usuarios que podem publicar artigos
+model User{
+  id String @id @default(uuid())
+  full_name String
+  password String
+  email String
+  articles Article[]
+}

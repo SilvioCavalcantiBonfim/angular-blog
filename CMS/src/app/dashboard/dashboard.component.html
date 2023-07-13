@@ -1,0 +1,108 @@
+<div class="min-h-full">
+
+  <app-navegation>
+    <app-dropdown [actions]="actions" [profile]="profile" />
+  </app-navegation>
+  
+  <main class="bg-gray-100 min-h-[calc(100vh-4rem)]">
+    <div
+      class="mx-auto max-w-7xl flex flex-col sm:flex-row ap-x-4 divide-x min-h-[calc(100vh-4rem)]"
+    >
+      <!-- Lado esquerdo do painel -->
+      <div
+        class="w-full sm:w-1/3 sm:min-h-[calc(100vh-4rem)] flex flex-col gap-4 p-4"
+      >
+        <input
+          class="w-full drop-shadow-xl rounded py-2 px-5"
+          placeholder="Buscar"
+          type="text"
+          #search
+        />
+        <div
+          class="overflow-y-auto flex sm:flex-col gap-4 sm:h-[calc(100vh-24px-14.75rem)]"
+        >
+          <ng-container *ngIf="articles$ | async as articles; else notarticlepublish">
+            <app-tile-article
+              [data]="art"
+              (ClickCommentButton)="switch.state.next('COMMENT')"
+              (EmitterId)="EmitterId($event)"
+              [active]="id$ | async"
+              *ngFor="let art of filter(articles,search.value)"
+            />
+          </ng-container>
+          <ng-template #notarticlepublish>
+            <app-tile-empty icon="newspaper" description="Não há nenhum artigo publicado."/>
+          </ng-template>
+        </div>
+        <app-tile-empty
+          icon="add_circle"
+          [interactive]="true"
+          description="Elaborar Novo Artigo"
+          (click)="EmitterId(null)"
+        />
+      </div>
+      <!-- Lado direito do painel -->
+      <div class="sm:w-2/3 w-full px-4 divide-y">
+        <app-switch #switch />
+        <div
+          class="sm:h-[calc(100vh-24px-7rem)] overflow-y-auto"
+          [ngClass]="{
+            hidden: (switch.state | async) !== 'EDITOR'
+          }"
+        >
+          <app-editor
+            #editor
+            class="drop-shadow-xl"
+            [init]="adapter(article$ | async)"
+          />
+          <div class="flex justify-between px-4">
+            <button
+              class="flex items-center py-2 px-4 rounded bg-gray-800 hover:bg-gray-700 border text-white"
+              (click)="publish()"
+            >
+              <span class="material-symbols-outlined mr-2">public</span>
+              <span>Publicar</span>
+            </button>
+
+            <ng-container *ngIf="id$ | async as id">
+              <button
+                class="flex items-center py-2 px-4 rounded bg-red-800 hover:bg-red-700 border text-white"
+                *ngIf="id !== null && id !== undefined"
+                (click)="delete(id)"
+              >
+                <span class="material-symbols-outlined mr-2"
+                  >delete_forever</span
+                >
+                <span>Apagar</span>
+              </button>
+            </ng-container>
+          </div>
+        </div>
+        <ng-container *ngIf="(switch.state | async) === 'COMMENT'">
+          <div class="p-4 flex flex-col gap-2 h-[calc(100vh-24px-7rem)] overflow-y-auto">
+            <ng-container *ngIf="(id$ | async) !== null; else notarticle">
+              <ng-container *ngIf="(article$ | async) as article">
+                <ng-container *ngIf="article.comments.length > 0; else notcomment">
+                  <app-tile-comment 
+                    [comment]="comment" 
+                    *ngFor="let comment of article.comments" 
+                    (deleteHandle)="deleteComment($event)"
+                  />
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            <ng-template #notcomment>
+              <app-tile-empty icon="comment" description="Este artigo ainda não recebeu nenhum comentário."/>
+            </ng-template>
+            <ng-template #notarticle>
+              <app-tile-empty icon="newspaper" description="Não há nenhum artigo em destaque."/>
+            </ng-template>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </main>
+</div>
+
+<app-profile-editor #profileModal [init]="profile" (submitForm)="updateProfile($event)"/>
+<app-notification #notification/>

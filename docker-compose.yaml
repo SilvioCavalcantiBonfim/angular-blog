@@ -1,0 +1,51 @@
+version: '3'
+services:
+  backend:
+    container_name: backend
+    build: ./backend
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - ./backend:/home/node/backend
+    networks:
+      - networkApplication
+    command: sh -c 'while ! nc -zvw5 db 3306 > /dev/null 2>&1; do sleep 1; done && echo "Conexão com o MySQL estabelecida!" && node dist/main.js'
+    depends_on:
+      - db
+  
+  cms:
+    container_name: cms
+    build: ./CMS
+    ports:
+      - 4100:4100
+    networks:
+      - networkApplication
+    depends_on:
+      - backend
+
+  db:
+    container_name: db
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./.docker/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - networkApplication
+    ports:
+      - 3306:3306
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - networkApplication
+    depends_on:
+      - db
+
+networks:
+  networkApplication:

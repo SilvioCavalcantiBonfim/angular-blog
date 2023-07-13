@@ -1,0 +1,115 @@
+<div
+  class="sm:flex hidden gap-x-6 border-l-8 border-green-500 cursor-pointer drop-shadow-md transition-all rounded bg-white border-0"
+>
+  <div class="flex flex-col">
+    <div class="flex justify-between pt-4 pl-4">
+      <div class="min-w-0 flex-auto">
+        <p
+          class="mt-1 truncate text-xs leading-5 text-gray-500"
+          *ngIf="comment.author === 'anonimo'; else email"
+        >
+          Comentário de um usuário anônimo
+        </p>
+        <ng-template #email>
+          <p class="mt-1 truncate text-xs leading-5 text-gray-500">
+            Comentário de
+            <a [href]="'mailto://' + comment.author" class="text-blue-500">{{
+              comment.author
+            }}</a>
+          </p>
+        </ng-template>
+      </div>
+      <div class="flex items-end">
+        <p class="mt-1 text-xs leading-5 text-gray-500">
+          {{ formatDateCreated() }}
+        </p>
+      </div>
+    </div>
+    <p class="text-base font-medium leading-6 pb-4 pl-4 text-gray-800">
+      {{ comment.content }}
+    </p>
+  </div>
+  <button
+    (click)="deleteHandle.emit(comment)"
+    class="bg-red-700 hover:bg-red-600 rounded-r flex items-center justify-between transition-all"
+  >
+    <span class="material-symbols-outlined px-5 text-red-200"> delete </span>
+  </button>
+</div>
+
+<div
+  class="flex flex-col sm:hidden cursor-pointer drop-shadow-md transition-all rounded bg-white border-0"
+>
+  <div class="flex flex-col rounded-t gap-x-6 border-l-8 border-green-500 ">
+    <div class="pt-4 pl-4">
+      <div class="min-w-0 flex-auto">
+        <p
+          class="mt-1 truncate text-xs leading-5 text-gray-500"
+          *ngIf="comment.author === 'anonimo'; else email"
+        >
+          Comentário de um usuário anônimo
+        </p>
+        <ng-template #email>
+          <p class="mt-1 truncate text-xs leading-5 text-gray-500">
+            Comentário de
+            <a [href]="'mailto://' + comment.author" class="text-blue-500">{{
+              comment.author
+            }}</a>
+          </p>
+        </ng-template>
+      </div>
+      <div class="flex items-end">
+        <p class="mt-1 text-xs leading-5 text-gray-500 pr-4">
+          {{ formatDateCreated() }}
+        </p>
+      </div>
+    </div>
+    <p class="text-base font-medium leading-6 pb-4 pl-4 text-gray-800">
+      {{ comment.content }}
+    </p>
+  </div>
+  <button 
+    (click)="deleteHandle.emit(comment)"
+    class="bg-red-700 hover:bg-red-600 rounded-b flex items-center justify-center transition-all py-4"
+  >
+    <span class="material-symbols-outlined px-5 text-red-200"> delete </span>
+  </button>
+</div>
+<!-- <div
+  class="flex gap-x-6 border-l-8 border-green-500 cursor-pointer drop-shadow-md transition-all rounded bg-white border-0"
+>
+  <div class="flex flex-col">
+    <div class="flex justify-between pt-4 pl-4">
+      <div class="min-w-0 flex-auto">
+        <p
+          class="mt-1 truncate text-xs leading-5 text-gray-500"
+          *ngIf="comment.author === 'anonimo'; else email"
+        >
+          Comentário de um usuário anônimo
+        </p>
+        <ng-template #email>
+          <p class="mt-1 truncate text-xs leading-5 text-gray-500">
+            Comentário de
+            <a [href]="'mailto://' + comment.author" class="text-blue-500">{{
+              comment.author
+            }}</a>
+          </p>
+        </ng-template>
+      </div>
+      <div class="flex items-end">
+        <p class="mt-1 text-xs leading-5 text-gray-500">
+          {{ formatDateCreated() }}
+        </p>
+      </div>
+    </div>
+    <p class="text-base font-medium leading-6  pb-4 pl-4 text-gray-800">
+      {{ comment.content }}
+    </p>
+  </div>
+  <button (click)="deleteHandle.emit(comment)" 
+    class="bg-red-700 hover:bg-red-600 rounded-r flex items-center justify-between transition-all">
+    <span class="material-symbols-outlined px-5 text-red-200">
+      delete
+    </span>
+  </button>
+</div> -->

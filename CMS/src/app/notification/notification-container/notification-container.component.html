@@ -1,0 +1,24 @@
+<div
+  [@fade]="true"
+  [ngClass]="colors[notification.color][0]"
+  class=" rounded py-3 px-4 min-w-[30vw] w-screen sm:w-auto flex justify-between items-center relative drop-shadow-lg"
+>
+  <div class="flex items-center">
+    <span class="material-symbols-outlined mr-2">{{notification.icon}}</span>
+    <span>{{notification.message}}</span>
+  </div>
+  <button
+    (click)="close()"
+    [ngClass]="colors[notification.color][1]"
+    class="flex justify-center items-center transition-all rounded-full p-1"
+  >
+    <span class="material-symbols-outlined">close</span>
+  </button>
+  <div
+    [ngClass]="colors[notification.color][2]"
+    [ngStyle]="{
+      'width': size*100+'%'
+    }"
+    class="absolute h-[3px] bottom-0 left-0 rounded-b"
+  ></div>
+</div>

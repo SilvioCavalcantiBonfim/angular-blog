@@ -1,0 +1,121 @@
+{
+  "view":  [
+      {
+        "id": "8ad5759d-e6a5-4d73-a5fa-6769ad3105ad",
+        "title": "Descobrindo a Magia da Fotografia: Um Guia para Iniciantes",
+        "created_at": "2023-07-11T00:40:03.268Z",
+        "updated_at": "2023-07-11T00:40:03.268Z",
+        "comments": [],
+        "thumb": "https://i.pinimg.com/564x/55/c8/5b/55c85be926efc0b1a90f64d607d3ec8e.jpg",
+        "Author": {
+          "email": "admin@blog.com",
+          "full_name": "Admin"
+        }
+      },
+      {
+        "id": "5fb8e3dc-453b-4391-99d5-a270aaba3570",
+        "title": "A Importância da Resiliência: Como Lidar com Desafios e Superar Obstáculos",
+        "created_at": "2023-07-10T23:41:09.781Z",
+        "updated_at": "2023-07-10T23:41:09.781Z",
+        "comments": [],
+        "thumb": "https://i.pinimg.com/564x/c2/51/b3/c251b3c052e0747484e6a5637bd75324.jpg",
+        "Author": {
+          "email": "admin@blog.com",
+          "full_name": "Admin"
+        }
+      },
+      {
+        "id": "0c704389-45a4-448a-a2ff-f2a9362051ac",
+        "title": "A Importância da Autodisciplina na Busca pelo Sucesso",
+        "created_at": "2023-07-10T23:24:19.909Z",
+        "updated_at": "2023-07-10T23:24:19.909Z",
+        "comments": [],
+        "thumb": "https://i.pinimg.com/564x/03/f4/72/03f472c5bc50955a63ba922ffa29b844.jpg",
+        "Author": {
+          "email": "admin@blog.com",
+          "full_name": "Admin"
+        }
+      },
+      {
+        "id": "b9ed6d89-c808-4180-9019-285d34213e9d",
+        "title": "A Importância da Programação: Desvendando o Poder da Era Digital",
+        "created_at": "2023-07-07T00:40:23.021Z",
+        "updated_at": "2023-07-11T00:08:17.369Z",
+        "comments": [],
+        "thumb": "https://i.pinimg.com/564x/2c/66/a7/2c66a7c617b834535487fbc24a7c3d82.jpg",
+        "Author": {
+          "email": "admin@blog.com",
+          "full_name": "Admin"
+        }
+      },
+      {
+        "id": "c3be6e01-af92-461c-9c1a-74e8f5c3d347",
+        "title": "O que é um Blog e como ele pode impactar sua presença online",
+        "created_at": "2023-07-06T21:00:25.175Z",
+        "updated_at": "2023-07-11T00:09:54.491Z",
+        "comments": [
+          {
+            "id": "a636e56e-476a-462a-a46b-2bf912700b0c",
+            "article_id": "c3be6e01-af92-461c-9c1a-74e8f5c3d347",
+            "content": "Ótimo artigo! Explicou claramente o que é um blog e seu impacto na presença online. Destacou benefícios, dicas e ferramentas úteis. Recurso valioso para construir presença online. Parabéns!",
+            "author": "ChatGPT",
+            "created_at": "2023-07-11T00:13:45.200Z"
+          }
+        ],
+        "thumb": "https://i.pinimg.com/564x/50/e6/bc/50e6bc733c4a003745cdf18ac262b6fd.jpg",
+        "Author": {
+          "email": "admin@blog.com",
+          "full_name": "Admin"
+        }
+      }
+    ],
+  "settings": {
+    "title": "Meu Blog",
+    "subtitle": "Descobrindo Horizontes",
+    "carousel_amount": 3,
+    "carousel_time": 5000,
+    "Theme": {
+      "id": "82f49b10-1fea-11ee-b1dc-0242ac120002",
+      "color1": "#7fe8bc",
+      "color2": "#516ab8"
+    }
+  },
+  "take4": [
+    {
+      "id": "8ad5759d-e6a5-4d73-a5fa-6769ad3105ad",
+      "title": "Descobrindo a Magia da Fotografia: Um Guia para Iniciantes",
+      "created_at": "2023-07-11T00:40:03.268Z",
+      "updated_at": "2023-07-11T00:40:03.268Z",
+      "comments": [],
+      "thumb": "https://i.pinimg.com/564x/55/c8/5b/55c85be926efc0b1a90f64d607d3ec8e.jpg",
+      "Author": {
+        "email": "admin@blog.com",
+        "full_name": "Admin"
+      }
+    },
+    {
+      "id": "5fb8e3dc-453b-4391-99d5-a270aaba3570",
+      "title": "A Importância da Resiliência: Como Lidar com Desafios e Superar Obstáculos",
+      "created_at": "2023-07-10T23:41:09.781Z",
+      "updated_at": "2023-07-10T23:41:09.781Z",
+      "comments": [],
+      "thumb": "https://i.pinimg.com/564x/c2/51/b3/c251b3c052e0747484e6a5637bd75324.jpg",
+      "Author": {
+        "email": "admin@blog.com",
+        "full_name": "Admin"
+      }
+    },
+    {
+      "id": "0c704389-45a4-448a-a2ff-f2a9362051ac",
+      "title": "A Importância da Autodisciplina na Busca pelo Sucesso",
+      "created_at": "2023-07-10T23:24:19.909Z",
+      "updated_at": "2023-07-10T23:24:19.909Z",
+      "comments": [],
+      "thumb": "https://i.pinimg.com/564x/03/f4/72/03f472c5bc50955a63ba922ffa29b844.jpg",
+      "Author": {
+        "email": "admin@blog.com",
+        "full_name": "Admin"
+      }
+    }
+  ]
+}

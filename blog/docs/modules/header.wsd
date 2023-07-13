@@ -1,0 +1,14 @@
+@startuml
+
+interface content
+
+package "Header Module" {
+  component "app-header" as h {
+    class HeaderComponent {
+      + String path
+      + EventEmitter<void> homeHandle()
+    }
+  }
+}
+content . HeaderComponent
+@enduml

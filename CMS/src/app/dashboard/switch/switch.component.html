@@ -1,0 +1,33 @@
+<div class="p-4 flex divide-x" *ngIf="state | async as st">
+  <div
+    (click)="state.next('EDITOR')"
+    class="flex transition-all items-center"
+    [ngClass]="classEditor[st]"
+  >
+    <button>
+      <span
+        class="material-symbols-outlined mr-1 p-2 rounded transition-all"
+        [ngClass]="st === 'COMMENT' ? 'hover:bg-gray-800  hover:text-white' : ''"
+      >
+        border_color
+      </span>
+    </button>
+    <span *ngIf="st === 'EDITOR'" class="text-gray-800"> Editor </span>
+  </div>
+
+  <div
+    (click)="state.next('COMMENT')"
+    class="flex transition-all items-center"
+    [ngClass]="classComment[st]"
+  >
+    <button>
+      <span
+        class="material-symbols-outlined p-2 rounded transition-all"
+        [ngClass]="st === 'EDITOR' ? 'hover:bg-gray-800 hover:text-white' : ''"
+      >
+        comment
+      </span>
+    </button>
+    <span *ngIf="st === 'COMMENT'"> Comentários </span>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="flex min-h-full flex-col justify-start px-1 py-12 lg:px-4">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <app-animation />
+    <h2
+      class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
+    >
+      Faça login em sua conta
+    </h2>
+  </div>
+
+  <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form class="space-y-4" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div>
+        <app-input
+          icon="account_circle"
+          label="Email"
+          type="email"
+          autocomplete="email"
+          name="email"
+          [FormGroup]="loginForm"
+          LabelFormControl="email"
+          #email
+        />
+      </div>
+      <div>
+        <app-input
+          icon="lock"
+          label="Senha"
+          type="password"
+          autocomplete="current-password"
+          name="password"
+          [FormGroup]="loginForm"
+          LabelFormControl="password"
+          #password
+        />
+      </div>
+      <div>
+        <button
+          type="submit"
+          class="flex w-full justify-center rounded bg-gray-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700"
+        >
+          <span class="material-symbols-rounded mr-1">key</span>Entrar
+        </button>
+      </div>
+      <div>
+        <app-alert #alert />
+      </div>
+    </form>
+  </div>
+</div>

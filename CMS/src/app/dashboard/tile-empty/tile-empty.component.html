@@ -1,0 +1,14 @@
+<div
+  class="flex justify-center gap-x-6 p-5 border-2 border-dashed transition-all rounded text-gray-500"
+  (click)="onclick.emit($event)"
+  [ngClass]="{
+    'hover:text-gray-800 hover:border-gray-400 cursor-pointer': interactive
+  }"
+>
+  <div class="min-w-0 items-center flex flex-col">
+    <p class="text-base font-semibold leading-6 items-center flex flex-col">
+      <span class="material-symbols-outlined">{{icon}}</span>
+    </p>
+    <p class="mt-1 truncate text-xs leading-5">{{description}}</p>
+  </div>
+</div>

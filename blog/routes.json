@@ -1,0 +1,4 @@
+{
+  "/view/all": "/view",
+  "/view/all?take=3": "/take4"
+}
