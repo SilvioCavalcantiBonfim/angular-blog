@@ -30,8 +30,8 @@ Content-Type: application/json
 }
 ###
 
-POST http://localhost:3000/article/new
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiOWVkNmQ4OS1jODA4LTQxODAtOTAxOS0yODVkMzQyMTNlOWQiLCJpYXQiOjE2ODkwMzU4MDksImV4cCI6MTY4OTAzOTQwOX0.cwyBUPmHuDLWVDgy3Hz2JUHo2f91ws7aKGx-bVkT4pk
+POST http://localhost:3000/article/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiOWVkNmQ4OS1jODA4LTQxODAtOTAxOS0yODVkMzQyMTNlOWQiLCJpYXQiOjE2ODkyNzYxMjcsImV4cCI6MTY4OTI3OTcyN30.bNeGfLH0Wp_gSsG4qDuW-N4vcWtOBgHL7mpERaTKS78
 Content-Type: application/json
 
 {

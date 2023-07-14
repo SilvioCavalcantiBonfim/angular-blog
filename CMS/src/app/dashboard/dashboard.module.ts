@@ -13,6 +13,7 @@ import { ProfileEditorComponent } from './profile-editor/profile-editor.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotificationModule } from '../notification/notification.module';
 import { NavegationComponent } from './navegation/navegation.component';
+import { SettingEditorComponent } from './settings-editor/setting-editor.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NavegationComponent } from './navegation/navegation.component';
     TileCommentComponent,
     TileEmptyComponent,
     ProfileEditorComponent,
-    NavegationComponent
+    NavegationComponent,
+    SettingEditorComponent
   ],
   imports: [
     CommonModule,

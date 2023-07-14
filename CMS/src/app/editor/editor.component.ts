@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, DoCheck, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Editor, Toolbar, toHTML } from 'ngx-editor';
-import { BehaviorSubject, Observable, ReplaySubject, combineLatest, fromEvent, map } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, combineLatest, concat, forkJoin, map, merge, zip } from 'rxjs';
 import { InputInit } from '../entity/initInput.interface';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -13,7 +13,6 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
   @Input() init!: InputInit;
 
   titleGroup!: FormGroup;
-  titleControl!: FormControl;
 
   editor!: Editor;
 
@@ -25,15 +24,18 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
     ['horizontal_rule', 'format_clear'],
   ];
 
-  update: BehaviorSubject<InputInit> = new BehaviorSubject<InputInit>({id: null, title: '', content: ''});
+  update: BehaviorSubject<InputInit> = new BehaviorSubject<InputInit>({id: null, title: '', thumb: '', content: ''});
+
+  editor$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor() {
-    this.titleControl = new FormControl();
     this.titleGroup = new FormGroup({
-      title: this.titleControl
+      title: new FormControl(''),
+      thumb: new FormControl(''),
     });
-
-    // this.update.subscribe(console.log)
+    combineLatest(
+      [this.titleGroup.valueChanges, this.editor$.asObservable()]
+    ).pipe(map((e) => ({...e[0], content: e[1]}))).subscribe(this.update)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -47,17 +49,11 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit(): void {
     this.editor = new Editor();
-
-    combineLatest(
-      [
-        this.titleControl.valueChanges,
-        this.editor.valueChanges.pipe(map(r => toHTML(r)))
-      ]
-    ).pipe(
-      map(r => ({id: this.init.id, title: r[0], content: r[1]} as InputInit))).subscribe(this.update)
+    this.editor.valueChanges.pipe(map(r => toHTML(r))).subscribe(this.editor$)
   }
 
   ngOnDestroy(): void {
     this.editor?.destroy();
   }
+
 }

@@ -1,13 +1,63 @@
-
-<div class="p-4 flex flex-col gap-y-4">
+<div class="p-4 flex flex-col gap-y-4" style="z-index: -1;">
   <div class="flex gap-2">
-    <form [formGroup]="titleGroup" class="w-full">
-      <input 
-        class="w-full drop-shadow-xl rounded py-2 px-5" 
-        placeholder="Título"
-        formControlName="title"
-        [(ngModel)]="init.title"
-      />
+    <form [formGroup]="titleGroup" class="w-full  gap-3 flex flex-col">
+      <div
+        class="search relative w-full text-gray-600 drop-shadow-md"
+      >
+        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+          <button
+            type="submit"
+            class="p-1 focus:outline-none focus:shadow-outline"
+            (click)="title.focus()"
+          >
+            <svg
+              fill="currentColor"
+              stroke="none"
+              viewBox="0 0 24 24"
+              class="w-6 h-6"
+            >
+              <path d="M9.24264 18.9964H21V20.9964H3V16.7538L12.8995 6.85431L17.1421 11.0969L9.24264 18.9964ZM14.3137 5.44009L16.435 3.31877C16.8256 2.92825 17.4587 2.92825 17.8492 3.31877L20.6777 6.1472C21.0682 6.53772 21.0682 7.17089 20.6777 7.56141L18.5563 9.68273L14.3137 5.44009Z"></path>
+            </svg>
+          </button>
+        </span>
+        <input
+          type="text"
+          class="py-2 w-full bg-white rounded pl-10 focus:outline-none"
+          placeholder="Título"
+          formControlName="title"
+          [(ngModel)]="init.title"
+          #title
+        />
+      </div>
+
+      <div
+        class="search relative w-full text-gray-600 drop-shadow-md"
+      >
+        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+          <button
+            type="submit"
+            class="p-1 focus:outline-none focus:shadow-outline"
+            (click)="thumb.focus()"
+          >
+            <svg
+              fill="currentColor"
+              stroke="none"
+              viewBox="0 0 24 24"
+              class="w-6 h-6"
+            >
+              <path d="M16 21L11.2381 12.2698L15 6L23 21H16ZM8 10L14 21H2L8 10ZM5.5 8C4.11929 8 3 6.88071 3 5.5C3 4.11929 4.11929 3 5.5 3C6.88071 3 8 4.11929 8 5.5C8 6.88071 6.88071 8 5.5 8Z"></path>
+            </svg>
+          </button>
+        </span>
+        <input
+          type="text"
+          #thumb
+          formControlName="thumb"
+          [(ngModel)]="init.thumb"
+          class="py-2 w-full bg-white rounded pl-10 focus:outline-none"
+          placeholder="Thumb"
+        />
+      </div>
     </form>
   </div>
   <div class="NgxEditor__Wrapper" style="border: 0 !important">

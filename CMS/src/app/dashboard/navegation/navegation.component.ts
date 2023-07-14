@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-navegation',
   templateUrl: './navegation.component.html',
 })
 export class NavegationComponent {
-
+  @Input() title: string = 'Dashboard';
 }

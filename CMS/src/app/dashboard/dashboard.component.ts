@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { PermissionService } from '../Permission/permission.service';
 import { APICommunicationService } from '../apicommunication/apicommunication.service';
-import { ReplaySubject, distinctUntilChanged, map, of, switchMap, take } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, combineLatest, distinctUntilChanged, filter, map, of, switchMap, take, tap } from 'rxjs';
 import { Article } from '../entity/article.type';
 import { SwitchComponent } from './switch/switch.component';
 import { EditorComponent } from '../editor/editor.component';
@@ -9,6 +9,9 @@ import { adapter } from '../adapter/ArticleToInitInput.adapter';
 import { Comment } from '../entity/comment.type';
 import { ProfileEditorComponent } from './profile-editor/profile-editor.component';
 import { NotificationService } from '../notification/notification.service';
+import { Setting } from '../entity/setting.type';
+import { Profile } from '../entity/profile.type';
+import { SettingEditorComponent } from './settings-editor/setting-editor.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,8 +23,13 @@ export class DashboardComponent implements AfterViewInit {
 
   actions = [
     {
-      icon: 'account_circle', title: 'Your Profile', action: () => {
+      icon: 'account_circle', title: 'Meu Perfil', action: () => {
         this.profileModal?.show.next(true);
+      }
+    },
+    {
+      icon: 'settings', title: 'Configurações', action: () => {
+        this.settingModal?.show.next(true);
       }
     },
     {
@@ -34,9 +42,12 @@ export class DashboardComponent implements AfterViewInit {
   @ViewChild('switch') switch: SwitchComponent | undefined;
   @ViewChild('editor') editor: EditorComponent | undefined;
   @ViewChild('profileModal') profileModal: ProfileEditorComponent | undefined;
+  @ViewChild('settingModal') settingModal: SettingEditorComponent | undefined;
 
   // Refatoracao do fluxo do codigo
   id$: ReplaySubject<string | null> = new ReplaySubject<string | null>();
+
+  publishIsBlock$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   article$: ReplaySubject<Article> = new ReplaySubject<Article>();
 
@@ -47,14 +58,33 @@ export class DashboardComponent implements AfterViewInit {
   flowList$: ReplaySubject<void> = new ReplaySubject<void>();
   // 
 
-
-  profile: { full_name: string, email: string } = { full_name: '', email: '' };
+  profile: Profile = {
+    full_name: '',
+    email: ''
+  };
+  settings: Setting = {
+    title: '',
+    subtitle: '',
+    theme: [],
+    carousel: {
+      amount: 0,
+      time: 0
+    },
+    articles: {
+      total: 0,
+      per_page: 0
+    }
+  };
 
   constructor(private permissions: PermissionService, private apiCommunication: APICommunicationService, private notification: NotificationService) {
     this.updateArticleList();
     apiCommunication.GetProfile().subscribe({
       next: r => this.profile = r,
-      error: (err) => this.permissions.logout(),
+      error: (_) => this.permissions.logout(),
+    });
+    apiCommunication.getSettings().subscribe({
+      next: r => this.settings = r,
+      error: (_) => this.permissions.logout(),
     });
   }
 
@@ -85,7 +115,7 @@ export class DashboardComponent implements AfterViewInit {
       .subscribe({
         next: r => this.profile = r,
         error: (err) => this.permissions.logout(),
-        complete: () => this.notification.add('GRAY', 'Perfil atualizado sucesso', 'account_circle', 5000)
+        complete: () => this.notification.add('GRAY', 'Perfil atualizado com sucesso.', 'account_circle', 5000)
       });
   }
 
@@ -104,6 +134,7 @@ export class DashboardComponent implements AfterViewInit {
           const clearArticle: Article = {
             title: '',
             content: '',
+            thumb: '',
             created_at: '',
             updated_at: '',
             comments: []
@@ -137,35 +168,56 @@ export class DashboardComponent implements AfterViewInit {
   }
   //publica um novo artigo ou edita o artigo existente depende do id do artigo
   publish() {
-    this.editor?.update.pipe(take(1)).subscribe({
-      next: (input) => {
-        if (input.title === '' || input.content === '')
-          return
-        const body = {
-          title: input.title,
-          content: input.content
+    combineLatest([
+      this.id$.asObservable(),
+      this.publishIsBlock$.pipe(
+        filter(v => !v),
+        switchMap(() => {
+          if (this.editor)
+            return this.editor?.update;
+          else
+            return of({ id: '', title: '', content: '', thumb: '' });
+        })
+      )]).pipe(take(1))
+      .subscribe({
+        next: (input) => {
+          const id = input['0'];
+          const data = input['1'];
+          if (Object.values(data).indexOf('') !== -1) {
+            this.notification.add('RED', 'Algumas informações obrigatórias não foram preenchidas.', 'newspaper', 5000);
+            return
+          }
+          this.publishIsBlock$.next(true);
+          if (id) {
+            this.apiCommunication.updateArticle(id, data).subscribe({
+              error: () => this.permissions.logout(),
+              complete: () => {
+                this.updateArticleList();
+                this.publishIsBlock$.next(false);
+                this.notification.add('BLUE', 'Artigo foi atualizado com sucesso.', 'public', 5000);
+              }
+            });
+          } else {
+            this.apiCommunication.createArticle(data).subscribe({
+              next: (r) => {
+                this.EmitterId(r.id);
+              },
+              error: (err) => this.permissions.logout(),
+              complete: () => {
+                this.updateArticleList();
+                this.publishIsBlock$.next(false);
+                this.notification.add('GREEN', 'Artigo foi criado com sucesso.', 'public', 5000);
+              }
+            });
+          }
         }
-        if (input?.id) {
-          this.apiCommunication.updateArticle(input.id, body).subscribe({
-            error: (err) => this.permissions.logout(),
-            complete: () => {
-              this.updateArticleList();
-              this.notification.add('BLUE', 'Artigo foi atualizado com sucesso.', 'public', 5000);
-            }
-          });
-        } else {
-          this.apiCommunication.createArticle(body).subscribe({
-            next: (r) => {
-              this.EmitterId(r.id);
-            },
-            error: (err) => this.permissions.logout(),
-            complete: () => {
-              this.updateArticleList();
-              this.notification.add('GREEN', 'Artigo foi criado com sucesso.', 'public', 5000);
-            }
-          });
-        }
-      }
-    })
+      });
+  }
+  updateSettings($event: Setting) {
+    this.apiCommunication.setSettings($event).subscribe({
+      next: (v) => {this.settings = v},
+      complete: () => this.notification.add('GRAY', 'Configurações atualizadas com sucesso', 'settings', 5000)
+    });
+    // console.log($event);
   }
 }

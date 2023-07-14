@@ -4,6 +4,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { SHA256 } from 'crypto-js';
 import { Router } from '@angular/router';
 import { Article } from '../entity/article.type';
+import { Setting } from '../entity/setting.type';
+import { Profile } from '../entity/profile.type';
 
 @Injectable({
   providedIn: 'root'
@@ -42,12 +44,20 @@ export class APICommunicationService {
     return this.http.post<any>(`${this.endpoint}/profile`, body, { headers: this.Authorization()});
   }
 
+  setSettings(body: Setting){
+    return this.http.post<Setting>(`${this.endpoint}/setting`, body,{ headers: this.Authorization()});
+  }
+  
+  getSettings() {
+    return this.http.get<Setting>(`${this.endpoint}/setting`);
+  }
+
   GetArticles() {
-    return this.http.get<Article[]>(`${this.endpoint}/view/all`);
+    return this.http.get<Article[]>(`${this.endpoint}/article/read/all`);
   }
 
   GetFullArticle(id: string) {
-    return this.http.get<Article>(`${this.endpoint}/view/by/${id}`);
+    return this.http.get<Article>(`${this.endpoint}/article/read/${id}`);
   }
 
   private Authorization() {
@@ -59,12 +69,12 @@ export class APICommunicationService {
   }
 
   GetProfile(){
-    return this.http.get<{full_name: string, email: string}>(`${this.endpoint}/profile`, { headers: this.Authorization() });
+    return this.http.get<Profile>(`${this.endpoint}/profile`, { headers: this.Authorization() });
   }
 
 
-  createArticle(body: {title: string, content: string}) {
-    return this.http.post<any>(`${this.endpoint}/article/new`, body,{ headers: this.Authorization()});
+  createArticle(body: {title: string, thumb: string, content: string}) {
+    return this.http.post<any>(`${this.endpoint}/article/create`, body,{ headers: this.Authorization()});
   }
 
   updateArticle(id: string, body: {title: string, content: string}) {
@@ -73,5 +83,9 @@ export class APICommunicationService {
 
   deleteComment(id: string){
     return this.http.delete<any>(`${this.endpoint}/comment/delete/${id}`, { headers: this.Authorization() });
+  }
+
+  getAllTheme() {
+    return this.http.get<{id: number, color1: string, color2: string}[]>(`${this.endpoint}/setting/theme/all`);
   }
 }

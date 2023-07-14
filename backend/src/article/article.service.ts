@@ -94,6 +94,7 @@ export class ArticleService {
           content: true,
           created_at: true,
           updated_at: true,
+          thumb: true,
           comments: {
             select: {
               id: true,

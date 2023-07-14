@@ -4,7 +4,7 @@ import { AuthModule } from './auth/auth.module';
 import { ProfileModule } from './profile/profile.module';
 import { ArticleModule } from './article/article.module';
 import { CommentModule } from './comment/comment.module';
-import { SettingsModule } from './settings/settings.module';
+import { SettingModule } from './setting/setting.module';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { SettingsModule } from './settings/settings.module';
     ProfileModule,
     ArticleModule,
     CommentModule,
-    SettingsModule,
+    SettingModule,
   ],
   controllers: [],
   providers: [],
