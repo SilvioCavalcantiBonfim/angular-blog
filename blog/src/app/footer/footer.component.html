@@ -4,19 +4,21 @@
   <div
     class="mx-auto p-5 max-w-7xl px-4 w-full sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3  items-center gap-y-4"
   >
-    <div class="hidden md:flex flex-col items-start">
-      <span class="opacity-75 font-extralight">Developer in</span>
-      <div class="w-full flex justify-start">
-        <a href="https://angular.io/" target="_blank" class="rounded-full bg-transparent opacity-50 hover:opacity-70 hover:bg-gray-50 p-2 hover:bg-opacity-75">
-          <img height="16" width="16" src="https://cdn.simpleicons.org/angular/000000" />
-        </a>
-        <a href="https://nestjs.com/" target="_blank" class="rounded-full bg-transparent opacity-50 hover:opacity-70 hover:bg-gray-50 p-2 hover:bg-opacity-75">
-          <img height="16" width="16" src="https://cdn.simpleicons.org/nestjs/000000" />
-        </a>
+    <div class="hidden md:flex items-start">
+      <app-logo [size]="60" class="grayscale"/>
+      <div class="-translate-x-3">
+        <span class="opacity-75 font-extralight">Developer in</span>
+        <div class="w-full flex justify-start">
+          <a href="https://angular.io/" target="_blank" class="rounded-full bg-transparent opacity-50 hover:opacity-70 hover:bg-gray-50 p-2 hover:bg-opacity-75">
+            <img height="16" width="16" src="https://cdn.simpleicons.org/angular/000000" />
+          </a>
+          <a href="https://nestjs.com/" target="_blank" class="rounded-full bg-transparent opacity-50 hover:opacity-70 hover:bg-gray-50 p-2 hover:bg-opacity-75">
+            <img height="16" width="16" src="https://cdn.simpleicons.org/nestjs/000000" />
+          </a>
+        </div>
       </div>
     </div>
     <div class="hidden md:flex justify-center opacity-75">
-      <app-logo [size]="60" class="grayscale"/>
     </div>
     <div class="justify-self-center md:justify-self-end">
       <span class="opacity-75 font-extralight whitespace-nowrap">

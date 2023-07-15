@@ -1,7 +1,6 @@
 
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { slide } from 'src/app/animations/silde.animation';
-import { ApiService } from 'src/app/api.service';
 import { Article } from 'src/app/entity/article.type';
 import * as thumbFactory from 'src/app/factories/thumb.factory';
 

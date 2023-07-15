@@ -1,6 +1,6 @@
-import { AfterViewInit, ChangeDetectorRef, Component, DoCheck, ElementRef, Input, OnChanges, OnInit, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, DoCheck, ElementRef, Input, ViewChild } from '@angular/core';
 import { Setting } from '../entity/setting.type';
-import { BehaviorSubject, distinctUntilChanged, forkJoin, map, max, zip } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, map, zip } from 'rxjs';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class HeaderComponent implements DoCheck {
   sizeLogo: number = 0;
 
   ngOnInit(): void {
-    this.size.subscribe(console.log)
+    
   }
 
   

@@ -5,7 +5,7 @@
     <div
       class="justify-self-center px-2 md:justify-self-start items-center flex justify-center text-black text-opacity-80"
     >
-      <app-logo [color]="setting?.Theme?.color1 || '#F88669'"/>
+      <app-logo [color]="setting?.theme?.at(0) || '#F88669'"/>
       <svg height="45" [attr.width]="size | async" class="drop-shadow-md translate-x-[-20px]">
         <style>
           .heavy {
@@ -13,7 +13,7 @@
           }
         </style>
         <g>
-          <text x="0" y="23" id="myElement" #title class="heavy drop-shadow-sm" [attr.fill]="setting?.Theme?.color2">{{setting?.title?.toUpperCase()}}</text>
+          <text x="0" y="23" id="myElement" #title class="heavy drop-shadow-sm" [attr.fill]="setting?.theme?.at(1)">{{setting?.title?.toUpperCase()}}</text>
         </g>
         <text x="0" y="40" #subtitle class="drop-shadow-sm font-semibold text-gray-900" fill="currentColor">{{setting?.subtitle}}</text>
       </svg>

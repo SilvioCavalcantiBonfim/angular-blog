@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { fade } from 'src/app/animations/fade.animation';
 import { Article } from 'src/app/entity/article.type';
 import { thumb } from 'src/app/factories/thumb.factory';
 
 @Component({
   selector: 'app-post',
-  templateUrl: './post.component.html'
+  templateUrl: './post.component.html',
+  animations: [fade]
 })
 export class PostComponent {
   data = new Date();

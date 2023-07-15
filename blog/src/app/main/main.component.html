@@ -31,7 +31,7 @@
     class="bottom mx-auto relative py-5 max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center"
   >
   <ng-container *ngIf="highlight$ | async as articles">
-    <app-carousel class="w-full drop-shadow-lg" [articles]="articles" [interval]="setting.carousel_time || 1000"/>
+    <app-carousel class="w-full drop-shadow-lg" [articles]="articles" [interval]="setting.carousel.time || 1000"/>
   </ng-container>
   </section>
 </app-header>
@@ -39,10 +39,17 @@
 <main class="flex mt-5 flex-col w-full items-center gap-3">
   <app-post
     class="w-full max-w-3xl flex justify-center"
-    *ngFor="let article of articles$ | async; index as i"
+    *ngFor="let article of filter(articles, search.value); index as i"
     [article]="article"
     [index]="i+1"
   />
+
+  <div class="w-full mt-1 flex items-center justify-center" *ngIf="loading$ | async">
+    <span class="material-symbols-outlined animate-spin text-gray-100">
+      progress_activity
+      </span>
+  </div>
+  
 </main>
 
 <app-footer [settings]="setting"/>
