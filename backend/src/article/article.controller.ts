@@ -38,12 +38,14 @@ export class ArticleController {
 
   @Get('read/all')
   all(@Query('take') take, @Query('skip') skip, @Query('search') search) {
-    if (search) {
-      return this.articleService.findSearch(search);
-    }
     const Take = take ? Number(take) : undefined;
     const Skip = skip ? Number(skip) : 0;
-    return this.articleService.findAll(Skip, Take);
+    const Search = search ? search : '';
+    return this.articleService.findAll({
+      skip: Skip,
+      take: Take,
+      search: Search,
+    });
   }
 
   @Get('read/:id')

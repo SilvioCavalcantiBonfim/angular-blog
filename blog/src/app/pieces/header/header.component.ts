@@ -1,17 +1,22 @@
-import { Component, DoCheck, ElementRef, Input, ViewChild } from '@angular/core';
-import { Setting } from '../entity/setting.type';
+import { Component, DoCheck, ElementRef, ViewChild } from '@angular/core';
 import { BehaviorSubject, distinctUntilChanged, map, zip } from 'rxjs';
+import { SettingsService } from 'src/app/services/settings.service';
 
 
 @Component({
-  selector: 'app-header',
+  selector: 'Header',
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements DoCheck {
 
   title$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   subtitle$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  
+
+  @ViewChild('title', { static: false }) title: ElementRef | undefined;
+  @ViewChild('subtitle', { static: false }) subtitle: ElementRef | undefined;
+
+  constructor(public settingsService: SettingsService) {}
+
   ngDoCheck(): void {
     if(!Number.isNaN(this.title?.nativeElement?.clientWidth) && this.title?.nativeElement && this.title?.nativeElement?.clientWidth > 0){
       this.title$.next(this.title?.nativeElement?.clientWidth);
@@ -21,17 +26,6 @@ export class HeaderComponent implements DoCheck {
     }
   }
 
-  @Input() setting: Setting | undefined;
-  @ViewChild('title', { static: false }) title: ElementRef | undefined;
-  @ViewChild('subtitle', { static: false }) subtitle: ElementRef | undefined;
-  
-  sizeLogo: number = 0;
-
-  ngOnInit(): void {
-    
-  }
-
-  
   get size() {
     return zip(this.title$, this.subtitle$).pipe(map(e => Math.max(...e)), distinctUntilChanged());
   }

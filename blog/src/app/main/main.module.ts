@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
-import { HeaderModule } from '../header/header.module';
 import { PostComponent } from './post/post.component';
 import { CarouselModule } from '../carousel/carousel.module';
-import { FooterModule } from '../footer/footer.module';
+import { PiecesModule } from '../pieces/pieces.module';
 
 
 @NgModule({
@@ -17,9 +16,8 @@ import { FooterModule } from '../footer/footer.module';
   imports: [
     CommonModule,
     MainRoutingModule,
-    HeaderModule,
     CarouselModule,
-    FooterModule
+    PiecesModule
   ]
 })
 export class MainModule { }

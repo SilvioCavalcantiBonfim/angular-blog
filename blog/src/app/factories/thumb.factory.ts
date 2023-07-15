@@ -1,6 +1,6 @@
 import { Article } from "../entity/article.type";
 
-export function thumb(article: Article) {
+export function thumb(article: {thumb: string}) {
   let rtThumb = '';
   if (article.thumb.length > 0) {
     rtThumb = article.thumb;

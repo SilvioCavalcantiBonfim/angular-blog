@@ -118,36 +118,15 @@ export class ArticleService {
       throw new NotFoundException();
     }
   }
-  async findSearch(search: string) {
-    return await this.prismaService.article.findMany({
-      orderBy: {
-        created_at: 'desc',
-      },
-      where: {
-        title: {
-          contains: search,
-        },
-      },
-      select: {
-        content: false,
-        id: true,
-        title: true,
-        created_at: true,
-        updated_at: true,
-        comments: true,
-        thumb: true,
-        Author: {
-          select: {
-            id: false,
-            password: false,
-            email: true,
-            full_name: true,
-          },
-        },
-      },
-    });
-  }
-  async findAll(skip: number, take?: number) {
+  async findAll({
+    skip,
+    take,
+    search,
+  }: {
+    skip: number;
+    take?: number;
+    search: string;
+  }) {
     const totalRegister = await this.prismaService.article.count();
     let CurrentTake: number | undefined;
     if (take && totalRegister < take + skip) {
@@ -158,6 +137,11 @@ export class ArticleService {
     return await this.prismaService.article.findMany({
       orderBy: {
         created_at: 'desc',
+      },
+      where: {
+        title: {
+          contains: search,
+        },
       },
       skip: skip,
       take: CurrentTake,

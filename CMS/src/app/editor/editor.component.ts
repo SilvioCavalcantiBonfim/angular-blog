@@ -20,6 +20,7 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
     ['bold', 'italic','underline', 'strike'],
     ['code', 'blockquote'],
     ['text_color', 'background_color'],
+    [{ heading: ['h1', 'h2', 'h3'] }],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
     ['horizontal_rule', 'format_clear'],
   ];

@@ -2,3 +2,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+  h1 {
+    @apply text-2xl;
+    @apply text-black;
+  }
+  h2 {
+    @apply text-xl;
+    @apply text-black;
+  }
+  h3 {
+    @apply text-lg;
+    @apply text-black;
+  }
+}

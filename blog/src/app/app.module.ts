@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ApiService } from './api.service';
+import { PiecesModule } from './pieces/pieces.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,8 @@ import { ApiService } from './api.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PiecesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

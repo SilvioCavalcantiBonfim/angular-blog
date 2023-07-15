@@ -1,0 +1,43 @@
+<ng-container *ngTemplateOutlet="carousel; context: {timer : selected$ | async}">
+</ng-container>
+
+<ng-template #carousel let-timer="timer">
+  <div
+    [ngSwitch]="timer % articles.length"
+    class="flex justify-center h-[400px] relative"
+    *ngIf="articles$ | async as articles"
+  >
+    <div [@slide]="timer % articles.length" class="self-start relative w-full">
+      <ng-container *ngFor="let article of articles; index as i">
+        <div
+          *ngSwitchCase="i"
+          (click)="redirect(article.id)"
+          class="absolute cursor-pointer rounded-md top-0 bg-white bg-opacity-70 h-[400px] w-full bg-contain bg-no-repeat bg-center"
+          [ngStyle]="{
+            'background-image':
+              'url(' + thumb(article) +')'
+          }"
+        >
+          <div
+            class="absolute drop-shadow-lg rounded-b-md bottom-0 font-semibold py-8 px-4 text-xl md:text-3xl w-full text-white backdrop-blur-sm bg-black bg-opacity-50"
+          >
+            {{ article.title }}
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  
+    <div class="absolute z-50 flex gap-2 mb-2 p-7">
+      <span
+        (click)="set(i)"
+        class="material-symbols-outlined cursor-pointer text-white drop-shadow"
+        [ngStyle]="{
+          'font-variation-settings': fontVariationSetting(timer === i)
+        }"
+        *ngFor="let article of articles; index as i"
+      >
+        circle
+      </span>
+    </div>
+  </div>
+</ng-template>
