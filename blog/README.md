@@ -51,6 +51,10 @@ Certifique-se de ter o Node.js e o Angular CLI instalados em sua máquina.
 - Tailwind CSS: Framework CSS utilitário para estilização rápida e responsiva.
 - TypeScript: Superset do JavaScript utilizado no desenvolvimento Angular.
 
+## Capturas de telas
+
+![Design sem nome (1)](https://github.com/SilvioCavalcantiBonfim/angular-blog/assets/89864715/572a077d-8c2e-4d40-b61f-3cecb9397228)
+
 ## Contribuição
 
 Contribuições são bem-vindas! Se você tiver sugestões, melhorias ou correções, sinta-se à vontade para abrir uma issue ou enviar um pull request.
