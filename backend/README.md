@@ -62,6 +62,8 @@ Este projeto utiliza autenticação JWT para proteger rotas específicas. A impl
 
 > Apesar do sistema não possuir uma rota para a criação de usuários, ele já está preparado para receber essa funcionalidade no módulo de autenticação.
 
+![BACKEND](https://github.com/SilvioCavalcantiBonfim/angular-blog/assets/89864715/e749d6da-d714-48d5-a4ba-917bfa1f28e5)
+
 ## Contribuição
 
 Contribuições são bem-vindas! Se você tiver sugestões, melhorias ou correções, sinta-se à vontade para abrir uma issue ou enviar um pull request.
