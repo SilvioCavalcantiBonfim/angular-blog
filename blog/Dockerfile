@@ -19,7 +19,7 @@ FROM nginx:1.25.1-alpine-slim AS ngi
 
 ENV ENDPOINT=http://localhost:3000
 
-COPY --from=build /home/node/blog/dist/administration /usr/share/nginx/html
+COPY --from=build /home/node/blog/dist/blog /usr/share/nginx/html
 
 COPY /nginx.conf  /etc/nginx/conf.d/default.conf
 # Exposing a port, here it means that inside the container 
