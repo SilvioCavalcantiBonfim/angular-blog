@@ -1,19 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ReplaySubject, switchMap } from 'rxjs';
+import { ReplaySubject, forkJoin, map, switchMap, take, takeLast, tap, withLatestFrom } from 'rxjs';
 import { Article } from '../entity/article.type';
 import { FullArticle } from '../entity/fullArticle.type';
 import { ApiService } from '../services/api.service';
 import { thumb } from '../factories/thumb.factory';
 import { formatDateCreated } from '../factories/formatDateCreated.factory';
+import { SettingsService } from '../services/settings.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
 })
 export class ArticleComponent {
+
   article$: ReplaySubject<FullArticle> = new ReplaySubject<FullArticle>();
-  constructor(private route: ActivatedRoute, private api: ApiService) {
+  commentForm!: FormGroup;
+
+  constructor(private route: ActivatedRoute, private api: ApiService, public settingsService: SettingsService) {
+    
     this.article$.next({
       title: 'teste',
       content: '',
@@ -26,12 +32,36 @@ export class ArticleComponent {
       },
       comments: []
     });
-    this.route.params.pipe(switchMap((v) => this.api.getFullArticle(v['id']))).subscribe(this.article$);
+    this.loadArticle();
   }
+  
+  private loadArticle() {
+    this.route.params.pipe(switchMap((v) => this.api.getFullArticle(v['id'])), take(1)).subscribe({next: e => this.article$.next(e), complete: () => {console.log('complete')}});
+  }
+
   thumb(article: FullArticle) {
     return thumb(article);
   }
+
   formatDateCreated(created: string) {
     return formatDateCreated(created);
+  }
+
+  submitComment(event: { content: string, author: string }){
+    this.route.params.pipe(
+      take(1), 
+      switchMap((v) => this.api.createComment(v['id'], event))
+    ).subscribe({complete: () => this.loadArticle()});
+  }
+
+  
+  get url() : string {
+    return window.location.href
+  }
+
+  genericalShare(url: string, paramsname: string) {
+    const params = new URLSearchParams();
+    params.set(paramsname, this.url);
+    return `${url}?${params.toString()}`;
   }
 }

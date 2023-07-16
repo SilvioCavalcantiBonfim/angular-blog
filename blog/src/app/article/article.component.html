@@ -1,9 +1,17 @@
 <ng-container
-  *ngTemplateOutlet="main; context: { article: article$ | async }"
+  *ngTemplateOutlet="
+    main;
+    context: {
+      article: article$ | async,
+      settings: settingsService.Settings | async
+    }
+  "
 ></ng-container>
 
-<ng-template #main let-article="article">
-  <main class=" font-normal m-0 w-full p-0 md:mx-auto md:drop-shadow-lg md:p-5 md:max-w-7xl md:px-6 lg:px-8 text-gray-600">
+<ng-template #main let-article="article" let-settings="settings">
+  <main
+    class="font-normal z-10 m-0 w-full p-0 md:mx-auto md:drop-shadow-lg md:p-5 md:max-w-7xl md:px-6 lg:px-8 text-gray-600"
+  >
     <div
       class="bg-white drop-shadow-xl rounded-none md:rounded-t-md bg-opacity-50 pt-[200px] bg-contain bg-no-repeat bg-center"
       [ngStyle]="{
@@ -11,24 +19,36 @@
       }"
     >
       <div
-        class=" p-5 bg-opacity-75 backdrop-blur-sm bg-white font-semibold text-2xl"
+        class="p-5 bg-opacity-75 backdrop-blur-sm bg-white font-semibold text-2xl"
       >
         {{ article.title }}
       </div>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 bg-gray-50 py-8 px-3  lg:px-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 bg-gray-50 py-8 px-3 lg:px-8">
       <div class="flex sm:col-start-1 row-start-2 sm:col-end-2 flex-col">
         <div class="tracking-[1px] text-sm font-normal flex">
           <span class="text-gray-400 mr-1">Escrito por</span>
-          <a class="text-blue-500 hover:text-blue-700" [href]="'mailto://'+article.Author.email">{{article.Author.full_name}}</a>
+          <a
+            class="text-blue-500 hover:text-blue-700"
+            [href]="'mailto://' + article.Author.email"
+            >{{ article.Author.full_name }}</a
+          >
         </div>
         <div class="flex tracking-[1px] text-xs font-normal">
           <span class="text-gray-400 mr-1">Publicado em </span>
-          <span class="text-gray-800" href="#">{{ formatDateCreated(article.created_at) }}</span>
+          <span class="text-gray-800" href="#">{{
+            formatDateCreated(article.created_at)
+          }}</span>
         </div>
       </div>
-      <div class="flex w-auto gap-2 sm:row-start-2 items-center sm:col-start-2 sm:col-end-3  justify-self-center sm:justify-self-end">
-        <a href="" class="text-white bg-[#0A66C2] p-2 rounded-full drop-shadow-md hover:drop-shadow-xl">
+      <div
+        class="flex w-auto gap-2 sm:row-start-2 items-center sm:col-start-2 sm:col-end-3 justify-self-center sm:justify-self-end"
+      >
+        <a
+          [href]="'https://www.linkedin.com/sharing/share-offsite/?url='+url"
+          target="_blank"
+          class="text-white hover:text-white bg-[#0A66C2] p-2 rounded-full drop-shadow-md hover:drop-shadow-xl"
+        >
           <svg width="16" height="16" viewBox="0 0 24 24">
             <path
               fill="currentColor"
@@ -36,8 +56,14 @@
             ></path>
           </svg>
         </a>
-  
-        <a href="" class="text-white bg-[#1D9BF0] p-2 rounded-full drop-shadow-md hover:drop-shadow-xl">
+
+        <a
+          [href]="
+            genericalShare('https://twitter.com/share', 'url')
+          "
+          target="_blank"
+          class="text-white hover:text-white bg-[#1D9BF0] p-2 rounded-full drop-shadow-md hover:drop-shadow-xl"
+        >
           <svg width="16" height="16" viewBox="0 0 24 24">
             <path
               fill="currentColor"
@@ -45,8 +71,14 @@
             ></path>
           </svg>
         </a>
-  
-        <a href="" class="text-white bg-[#1877F2] p-2 rounded-full drop-shadow-md hover:drop-shadow-xl">
+
+        <a
+          [href]="
+            genericalShare('https://www.facebook.com/sharer/sharer.php', 'href')
+          "
+          target="_blank"
+          class="text-white hover:text-white bg-[#1877F2] p-2 rounded-full drop-shadow-md hover:drop-shadow-xl"
+        >
           <svg width="16" height="16" viewBox="0 0 24 24">
             <path
               fill="currentColor"
@@ -55,18 +87,41 @@
           </svg>
         </a>
       </div>
-      
     </div>
     <div
       [innerHTML]="article.content"
       class="bg-gray-50 px-3 lg:px-8 pt-0 py-5 flex flex-col mt-[1px] text-lg"
     ></div>
-    <div class="bg-gray-50 px-3 pt-0 py-5 flex flex-col mt-[1px]">
-      <h1 class=" p-5 bg-opacity-75 bg-gray-50 font-semibold m-0 text-gray-600">Comentários</h1>
-      <p class="bg-white rounded-md p-2 text-justify border md:mx-20 indent-0 text-sm xl:text-base leading-6"><strong class="font-semibold">Política de Comentários:</strong> Amamos comentários e valorizamos o tempo que os leitores dedicam para compartilhar ideias e fornecer feedback. No entanto, todos os comentários são moderados manualmente e aqueles considerados como spam ou apenas promocionais serão excluídos.</p>
-      <div>
-        <app-comment/>
+    <div
+      class="bg-gray-50 px-3 pt-0 py-5 flex flex-col mt-[1px] md:rounded-b-md"
+    >
+      <h1 class="p-5 bg-opacity-75 bg-gray-50 font-semibold m-0 text-gray-600">
+        Comentários
+      </h1>
+      <p
+        class="bg-white rounded-md p-2 text-justify border md:mx-20 indent-0 text-sm xl:text-base leading-6"
+      >
+        <strong class="font-semibold">Política de Comentários:</strong> Amamos
+        comentários e valorizamos o tempo que os leitores dedicam para
+        compartilhar ideias e fornecer feedback. No entanto, todos os
+        comentários são moderados manualmente e aqueles considerados como spam
+        ou apenas promocionais serão excluídos.
+      </p>
+      <div class="mt-2 md:mx-20">
+        <app-comment
+          [comment]="comment"
+          class="flex justify-end"
+          [ngStyle]="{
+            'justify-content': i % 2 === 0 ? 'flex-start' : 'flex-end'
+          }"
+          [theme]="settings.theme[i % 2]"
+          *ngFor="let comment of article.comments; index as i"
+        />
       </div>
+      <app-comment-submit
+        [settings]="settings"
+        (onSubmit)="submitComment($event)"
+      />
     </div>
   </main>
 </ng-template>

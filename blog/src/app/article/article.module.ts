@@ -4,16 +4,20 @@ import { CommonModule } from '@angular/common';
 import { ArticleRoutingModule } from './article-routing.module';
 import { ArticleComponent } from './article.component';
 import { CommentComponent } from './comment/comment.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommentSubmitComponent } from './comment-submit/comment-submit.component';
 
 
 @NgModule({
   declarations: [
     ArticleComponent,
-    CommentComponent
+    CommentComponent,
+    CommentSubmitComponent
   ],
   imports: [
     CommonModule,
-    ArticleRoutingModule
+    ArticleRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class ArticleModule { }

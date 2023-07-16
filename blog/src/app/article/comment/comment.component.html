@@ -1,2 +1,19 @@
-<p>comment works!</p>
-<hr>
+<div 
+  class="w-[90%] drop-shadow-md my-4 pl-3 rounded-l-lg rounded-xl relative comment after:contents after: after:absolute after:w-[100px] after:h-[100px]"
+  [ngStyle]="{
+    'background':theme
+  }"
+>
+  <div class="w-full bg-white p-6 pl-2  rounded-r-lg">
+    <div class="grid grid-cols-[40px_1fr] sm:grid-cols-[40px_1fr_1fr] gap-x-2">
+      <span class="material-symbols-outlined  self-center row-span-2 sm:row-span-1 justify-center items-center flex rounded-full bg-gray-200 aspect-square w-100">
+        person
+      </span>
+      <span class="text-gray-800 text-lg font-normal capitalize self-center">{{comment.author}}</span>
+      <span class="text-gray-400 text-base font-normal self-center sm:justify-self-end sm:pr-2">{{formatDateCreated(comment.created_at)}}</span>
+      <div class="mt-6 col-start-2 pr-2 sm:col-span-2 sm:col-start-2">
+        {{comment.content}}
+      </div>
+    </div>
+  </div>
+</div>

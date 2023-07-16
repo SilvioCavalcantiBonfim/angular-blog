@@ -24,6 +24,16 @@ services:
     depends_on:
       - backend
 
+  blog:
+    container_name: blog
+    build: ./blog
+    ports:
+      - 4200:4200
+    networks:
+      - networkApplication
+    depends_on:
+      - backend
+
   db:
     container_name: db
     image: mysql

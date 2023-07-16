@@ -1,0 +1,86 @@
+<ng-container
+  *ngTemplateOutlet="
+    form;
+    context: {
+      validateAccept: validateAccept$ | async,
+      validateContent: validateContent$ | async
+    }
+  "
+>
+</ng-container>
+
+<ng-template
+  #form
+  let-validateAccept="validateAccept"
+  let-validateContent="validateContent"
+>
+  <div
+    class="bg-white mt-2 mb-6 md:mx-20 rounded-lg drop-shadow-lg py-10 px-10 flex flex-col gap-4"
+  >
+    <h1 class="p-0 flex items-center gap-2">
+      <span
+        class="material-symbols-outlined w-auto justify-center items-center p-2 rounded-full bg-gray-200 aspect-square"
+      >
+        comment
+      </span>
+      Deixe um comentário
+    </h1>
+    <form
+      class="flex-col flex gap-4"
+      [formGroup]="commentForm"
+      (ngSubmit)="onsubmit()"
+    >
+      <textarea
+        name=""
+        id=""
+        cols="30"
+        rows="10"
+        placeholder="Comentário"
+        class="resize-none border-2 border-gray-200 rounded-lg p-4"
+        formControlName="content"
+        [@shakeHorizontal]="validateContent"
+        (@shakeHorizontal.done)="validateContent$.next(false)"
+      ></textarea>
+      <input
+        class="border-2 border-gray-200 rounded-lg p-4"
+        placeholder="Nome"
+        formControlName="author"
+      />
+      <div
+        class="flex px-1 gap-2 justify-center items-center"
+        [@shakeHorizontal]="validateAccept"
+        (@shakeHorizontal.done)="validateAccept$.next(false)"
+      >
+        <input
+          type="checkbox"
+          class="h-4 w-4 rounded outline-red-500"
+          [ngStyle]="{ 'accent-color': settings.theme[1] }"
+          formControlName="accept"
+        />
+        <span
+          >Eu concordo com os
+          <a
+            (click)="router.navigate(['/terms-and-condition'])"
+            class="cursor-pointer"
+            >Termos e Condições</a
+          >
+          e
+          <a
+            (click)="router.navigate(['/terms-and-condition'])"
+            class="cursor-pointer"
+            >Política de Privacidade</a
+          >
+        </span>
+      </div>
+      <button
+        (mouseover)="hover = 1"
+        (mouseleave)="hover = 0"
+        type="submit"
+        [ngStyle]="{ 'background-color': settings.theme[hover] }"
+        class="flex w-full justify-center p-4 text-lg font-semibold leading-6 text-white shadow-sm rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      >
+        Enviar Comentário
+      </button>
+    </form>
+  </div>
+</ng-template>

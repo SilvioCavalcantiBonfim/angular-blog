@@ -58,7 +58,7 @@ GET http://localhost:3000/view/all?take=1&skip=1
 ###
 GET http://localhost:3000/view/all?take=3&skip=1
 ###
-POST http://localhost:3000/comment/c3be6e01-af92-461c-9c1a-74e8f5c3d347
+POST http://localhost:3000/comment/create/c3be6e01-af92-461c-9c1a-74e8f5c3d347
 Content-Type: application/json
 
 {

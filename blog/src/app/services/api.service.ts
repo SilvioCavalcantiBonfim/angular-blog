@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Setting } from '../entity/setting.type';
 import { Article } from '../entity/article.type';
 import { FullArticle } from '../entity/fullArticle.type';
+import { Comment } from '../entity/comment.type';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,9 @@ export class ApiService {
 
   getFullArticle(id: string) {
     return this.http.get<FullArticle>(`${this.endpoint}/article/read/${id}`);
+  }
+
+  createComment(id: string, data: { content: string, author: string }) {
+    return this.http.post<Comment>(`${this.endpoint}/comment/create/${id}`, data);
   }
 }
