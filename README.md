@@ -36,20 +36,28 @@ Após a execução do comando `docker compose up`, a demo estará disponível no
 
 ## Recursos e Funcionalidades
 
-- Blog em Angular:
-  - Visualização de artigos do blog em uma interface intuitiva e amigável para o usuário.
-  - Comentários e interações sociais integrados para envolvimento dos leitores.
-  - Página de detalhes do artigo com conteúdo completo, informações adicionais e seção de comentários.
-  - Páginas de pesquisa e filtragem para encontrar posts específicos.
+### Blog em Angular
 
-- CMS:
-  - Gerenciamento de artigos: criação, edição e exclusão de artigos.
-  - Moderação de comentários.
-  - Personalização do layout e estilo do blog.
+- Visualização de artigos do blog em uma interface intuitiva e amigável para o usuário.
+- Comentários e interações sociais integrados para envolvimento dos leitores.
+- Página de detalhes do artigo com conteúdo completo, informações adicionais e seção de comentários.
+- Páginas de pesquisa e filtragem para encontrar posts específicos.
 
-- Backend em Nest.js:
-  - API RESTful para comunicação entre o blog, o CMS e o banco de dados MySQL usando Prisma como ORM.
-  - Gerenciamento de dados no banco de dados MySQL, incluindo artigos e comentários.
+![Design sem nome (1)](https://github.com/SilvioCavalcantiBonfim/angular-blog/assets/89864715/3e492b71-ae54-46a2-b6fd-f5a3b0dfc495)
+
+### CMS
+- Gerenciamento de artigos: criação, edição e exclusão de artigos.
+- Moderação de comentários.
+- Personalização do layout e estilo do blog.
+
+![Design sem nome](https://github.com/SilvioCavalcantiBonfim/angular-blog/assets/89864715/3efe17c6-7e5e-45fc-ba5e-1da48c864673)
+
+### Backend em Nest.js
+
+- API RESTful para comunicação entre o blog, o CMS e o banco de dados MySQL usando Prisma como ORM.
+- Gerenciamento de dados no banco de dados MySQL, incluindo artigos e comentários.
+
+![BACKEND](https://github.com/SilvioCavalcantiBonfim/angular-blog/assets/89864715/4b2390a0-2ac3-4a1e-9f91-708cc984d57d)
 
 ## Contribuição
 
