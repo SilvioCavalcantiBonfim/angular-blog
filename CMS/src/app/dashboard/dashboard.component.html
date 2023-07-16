@@ -1,5 +1,5 @@
 <app-navegation [title]="settings.title" class="fixed w-full z-50">
-  <app-dropdown [actions]="actions" [profile]="profile"/>
+  <app-dropdown [actions]="actions" [profile]="profile" />
 </app-navegation>
 
 <div class="min-h-full">
@@ -20,17 +20,22 @@
         <div
           class="overflow-y-auto flex sm:flex-col gap-4 sm:h-[calc(100vh-24px-14.75rem)]"
         >
-          <ng-container *ngIf="articles$ | async as articles; else notarticlepublish">
+          <ng-container
+            *ngIf="articles$ | async as articles; else notarticlepublish"
+          >
             <app-tile-article
               [data]="art"
               (ClickCommentButton)="switch.state.next('COMMENT')"
               (EmitterId)="EmitterId($event)"
               [active]="id$ | async"
-              *ngFor="let art of filter(articles,search.value)"
+              *ngFor="let art of filter(articles, search.value)"
             />
           </ng-container>
           <ng-template #notarticlepublish>
-            <app-tile-empty icon="newspaper" description="Não há nenhum artigo publicado."/>
+            <app-tile-empty
+              icon="newspaper"
+              description="Não há nenhum artigo publicado."
+            />
           </ng-template>
         </div>
         <app-tile-empty
@@ -55,19 +60,21 @@
             [init]="adapter(article$ | async)"
           />
           <div class="flex justify-between px-4">
-              <button
-                class="flex items-center py-2 px-4 rounded cursor-pointer disabled:cursor-not-allowed bg-gray-800 hover:bg-gray-700 border text-white"
-                (click)="publish()"
-                [disabled]="(publishIsBlock$ | async)"
-              >
-                <ng-container *ngIf="!(publishIsBlock$ | async); else loading">
-                  <span class="material-symbols-outlined mr-2">public</span>
-                  <span>Publicar</span>
-                </ng-container>
-                <ng-template #loading>
-                  <span class="material-symbols-outlined animate-spin">progress_activity</span>
-                </ng-template>
-              </button>
+            <button
+              class="flex items-center py-2 px-4 rounded cursor-pointer disabled:cursor-not-allowed bg-gray-800 hover:bg-gray-700 border text-white"
+              (click)="publish()"
+              [disabled]="publishIsBlock$ | async"
+            >
+              <ng-container *ngIf="(publishIsBlock$ | async) !== null; else loading">
+                <span class="material-symbols-outlined mr-2">public</span>
+                <span>Publicar</span>
+              </ng-container>
+              <ng-template #loading>
+                <span class="material-symbols-outlined animate-spin"
+                  >progress_activity</span
+                >
+              </ng-template>
+            </button>
 
             <ng-container *ngIf="id$ | async as id">
               <button
@@ -84,23 +91,33 @@
           </div>
         </div>
         <ng-container *ngIf="(switch.state | async) === 'COMMENT'">
-          <div class="p-4 flex flex-col gap-2 h-[calc(100vh-24px-7rem)] overflow-y-auto">
+          <div
+            class="p-4 flex flex-col gap-2 h-[calc(100vh-24px-7rem)] overflow-y-auto"
+          >
             <ng-container *ngIf="(id$ | async) !== null; else notarticle">
-              <ng-container *ngIf="(article$ | async) as article">
-                <ng-container *ngIf="article.comments.length > 0; else notcomment">
-                  <app-tile-comment 
-                    [comment]="comment" 
-                    *ngFor="let comment of article.comments" 
+              <ng-container *ngIf="article$ | async as article">
+                <ng-container
+                  *ngIf="article.comments.length > 0; else notcomment"
+                >
+                  <app-tile-comment
+                    [comment]="comment"
+                    *ngFor="let comment of article.comments"
                     (deleteHandle)="deleteComment($event)"
                   />
                 </ng-container>
               </ng-container>
             </ng-container>
             <ng-template #notcomment>
-              <app-tile-empty icon="comment" description="Este artigo ainda não recebeu nenhum comentário."/>
+              <app-tile-empty
+                icon="comment"
+                description="Este artigo ainda não recebeu nenhum comentário."
+              />
             </ng-template>
             <ng-template #notarticle>
-              <app-tile-empty icon="newspaper" description="Não há nenhum artigo em destaque."/>
+              <app-tile-empty
+                icon="newspaper"
+                description="Não há nenhum artigo em destaque."
+              />
             </ng-template>
           </div>
         </ng-container>
@@ -109,6 +126,14 @@
   </main>
 </div>
 
-<app-profile-editor #profileModal [init]="profile" (submitForm)="updateProfile($event)"/>
-<app-setting-editor #settingModal [settings]="settings" (submitForm)="updateSettings($event)"/>
-<app-notification #notification/>
+<app-profile-editor
+  #profileModal
+  [init]="profile"
+  (submitForm)="updateProfile($event)"
+/>
+<app-setting-editor
+  #settingModal
+  [settings]="settings"
+  (submitForm)="updateSettings($event)"
+/>
+<app-notification #notification />

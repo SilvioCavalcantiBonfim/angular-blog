@@ -1,13 +1,16 @@
 <div class="p-4 flex divide-x" *ngIf="state | async as st">
   <div
     (click)="state.next('EDITOR')"
+    aria-hidden="true"
     class="flex transition-all items-center"
     [ngClass]="classEditor[st]"
   >
     <button>
       <span
         class="material-symbols-outlined mr-1 p-2 rounded transition-all"
-        [ngClass]="st === 'COMMENT' ? 'hover:bg-gray-800  hover:text-white' : ''"
+        [ngClass]="
+          st === 'COMMENT' ? 'hover:bg-gray-800  hover:text-white' : ''
+        "
       >
         border_color
       </span>
@@ -17,6 +20,7 @@
 
   <div
     (click)="state.next('COMMENT')"
+    aria-hidden="true"
     class="flex transition-all items-center"
     [ngClass]="classComment[st]"
   >

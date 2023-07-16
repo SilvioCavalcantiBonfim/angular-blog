@@ -8,9 +8,4 @@ export class AuthController {
   LogIn(@Body() SeginDto: Record<string, any>) {
     return this.authService.LogIn(SeginDto.user_access, SeginDto.password);
   }
-  // @UseGuards(AuthGuard)
-  // @Get('profile')
-  // profile(@Request() req) {
-  //   return this.authService.profile(req.user.sub);
-  // }
 }

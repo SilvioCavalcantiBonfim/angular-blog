@@ -4,19 +4,15 @@ import { EditorComponent } from './editor.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
-
 @NgModule({
-  declarations: [
-    EditorComponent
-  ],
+  declarations: [EditorComponent],
   imports: [
     CommonModule,
     NgxEditorModule,
     FormsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
-  exports: [EditorComponent]
+  exports: [EditorComponent],
 })
-export class EditorModule { }
+export class EditorModule {}

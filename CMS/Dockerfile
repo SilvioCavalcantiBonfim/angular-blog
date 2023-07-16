@@ -8,6 +8,7 @@ COPY --chown=node:node package*.json ./
 
 COPY --chown=node:node . .
 
+ENV ENDPOINT=http://localhost:3000
 
 RUN npm install
 

@@ -44,8 +44,6 @@ services:
       - ./.docker/mysql:/docker-entrypoint-initdb.d
     networks:
       - networkApplication
-    ports:
-      - 3306:3306
 
   adminer:
     image: adminer

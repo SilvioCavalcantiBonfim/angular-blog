@@ -1,28 +1,35 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { fromEvent } from 'rxjs';
-import { PermissionService } from 'src/app/Permission/permission.service';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Subscription, fromEvent } from 'rxjs';
 import { fade } from 'src/app/animations/fade.animation';
 
 @Component({
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
-  animations: [fade]
+  animations: [fade],
 })
-export class DropdownComponent implements OnInit{
-
+export class DropdownComponent implements OnInit, OnDestroy {
+  
   dorpdownstate = false;
 
-  @Input() actions!: {title:string, action: (() => void), icon: string}[];
-  @Input() profile!: {full_name: string, email: string};
+  private sub$: Subscription = new Subscription();
+
+  @Input() actions!: { title: string; action: () => void; icon: string }[];
+  @Input() profile!: { full_name: string; email: string };
 
   @ViewChild('dropdownButton') dropdownbutton: ElementRef | undefined;
 
   ngOnInit(): void {
-    fromEvent(window, 'click').subscribe((e) => {
-      if (this.dorpdownstate && !this.dropdownbutton?.nativeElement.contains(e.target)) {
-        this.dorpdownstate = false
+    this.sub$.add(fromEvent(window, 'click').subscribe((e) => {
+      if (
+        this.dorpdownstate &&
+        !this.dropdownbutton?.nativeElement.contains(e.target)
+      ) {
+        this.dorpdownstate = false;
       }
-    })
+    }));
   }
 
+  ngOnDestroy(): void {
+    this.sub$.unsubscribe();
+  }
 }

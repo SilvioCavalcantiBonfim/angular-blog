@@ -1,73 +1,71 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Backend para Sistema de Blog com Nest.js, Prisma e MySQL
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+![Typescript](https://img.shields.io/badge/-TypeScript-white?style=for-the-badge&logo=typescript&color=3178C6&logoColor=white)
+![nest](https://img.shields.io/badge/-nestJS-white?style=for-the-badge&logo=nestjs&color=E0234E&logoColor=white)
+![mysql](https://img.shields.io/badge/-mysql-white?style=for-the-badge&logo=mysql&color=4479A1&logoColor=white)
+![prisma](https://img.shields.io/badge/-prisma-white?style=for-the-badge&logo=prisma&color=2D3748&logoColor=white)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Este é um projeto de backend usando o framework Nest.js com integração ao Prisma para acesso ao banco de dados MySQL. O objetivo deste projeto é fornecer uma estrutura completa para desenvolver um backend para um sistema de blog, incluindo um CMS para gerenciamento de conteúdo. O sistema suporta rotas públicas para leitura de conteúdo e rotas protegidas para a criação, atualização e exclusão de conteúdo, utilizando autenticação JWT (JSON Web Token).
 
-## Description
+## Configuração do Ambiente
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Certifique-se de ter o Node.js e o npm (ou yarn) instalados em sua máquina.
 
-## Installation
+1. Clone este repositório para sua máquina local.
+2. Na raiz do projeto, execute `npm install` ou `yarn install` para instalar as dependências.
+3. Crie um arquivo `.env` na raiz do projeto e configure as variáveis de ambiente necessárias. Você pode se basear no arquivo `.env.example` fornecido.
+4. Certifique-se de ter um servidor MySQL em execução e atualize as informações de conexão no arquivo `prisma/schema.prisma`.
+5. Execute `npx prisma generate` para gerar os artefatos do Prisma com base no schema definido.
+6. Execute `npm run start:dev` ou `yarn start:dev` para iniciar o servidor de desenvolvimento.
 
-```bash
-$ npm install
-```
+## Estrutura do Projeto
 
-## Running the app
+- `src`: Contém o código-fonte principal do projeto.
+  - `article`: Recurso resposavel por gerenciar as rotas, serviços, modulos e DTO's relativas a artigos do blog.
+  - `comment`: Recurso resposavel por gerenciar as rotas, serviços, modulos e DTO's relativas a comentários dos artigos.
+  - `profile`: Recurso resposavel por gerenciar as rotas, serviços, modulos e DTO's relativas a perfil de usuários.
+  - `setting`: Recurso resposavel por gerenciar as rotas, serviços, modulos e DTO's relativas as configurações do blog.
+  - `app.module.ts`: Arquivo de configuração do módulo principal da aplicação.
+  - `main.ts`: Arquivo de entrada da aplicação.
 
-```bash
-# development
-$ npm run start
+## Autenticação JWT
 
-# watch mode
-$ npm run start:dev
+Este projeto utiliza autenticação JWT para proteger rotas específicas. A implementação da autenticação JWT pode ser encontrada na pasta `auth` e é aplicada às rotas que exigem autenticação. Certifique-se de fornecer um token JWT válido no cabeçalho `Authorization` ao acessar as rotas protegidas.
 
-# production mode
-$ npm run start:prod
-```
+## Rotas
 
-## Test
+### Autenticação
+- `POST /auth/login`: Rota de login que retorna um token JWT válido.
 
-```bash
-# unit tests
-$ npm run test
+### Artigos
+- `GET /article/read/all`: Rota pública para listar os artigos disponíveis.
+- `GET /article/read/:id`: Rota pública para obter detalhes de um artigo específico.
+- `POST /article/create`: Rota protegida para criar um novo artigo.
+- `PUT /article/update/:id`: Rota protegida para atualizar um artigo existente.
+- `DELETE /article/delete/:id`: Rota protegida para excluir um artigo existente.
 
-# e2e tests
-$ npm run test:e2e
+### Comentários
 
-# test coverage
-$ npm run test:cov
-```
+- `POST /comment/create/:id_article`: Rota pública para criar um novo comentário em um artigo.
+- `DELETE /comment/delete/:id`: Rota protegida para excluir um comentário existente.
 
-## Support
+### Perfil
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- `GET /profile`: Rota privada retornar o perfil do usuário.
+- `PUT /profile`: Rota protegida para atualizar o perfil do usuário.
 
-## Stay in touch
+### Configurações
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- `GET /setting/theme/all`: Rota publica retornar a lista dos temas do blog.
+- `GET /setting`: Rota publica retornar as configurações do blog.
+- `PUT /setting`: Rota protegida para atualizar as configurações do blog.
 
-## License
+> Apesar do sistema não possuir uma rota para a criação de usuários, ele já está preparado para receber essa funcionalidade no módulo de autenticação.
 
-Nest is [MIT licensed](LICENSE).
+## Contribuição
+
+Contribuições são bem-vindas! Se você tiver sugestões, melhorias ou correções, sinta-se à vontade para abrir uma issue ou enviar um pull request.
+
+## Licença
+
+Este projeto está licenciado sob a licença [MIT](LICENSE).

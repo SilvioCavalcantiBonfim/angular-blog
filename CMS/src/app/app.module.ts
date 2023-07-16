@@ -11,17 +11,15 @@ import { PermissionService } from './Permission/permission.service';
 import { NgModel } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    LottieModule.forRoot({ player: () => import('lottie-web') })
+    LottieModule.forRoot({ player: () => import('lottie-web') }),
   ],
   providers: [CookieService, PermissionService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

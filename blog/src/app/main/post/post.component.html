@@ -1,34 +1,40 @@
-<article 
+<article
   @fade
-  class="bg-white cursor-pointer hover:md:scale-105 hover:scale-100 transition-all rounded-md mx-1 w-full flex drop-shadow-xl" 
+  class="bg-white cursor-pointer hover:md:scale-105 hover:scale-100 transition-all rounded-md mx-1 w-full flex drop-shadow-xl"
   style="aspect-ratio: 1168 / 358"
   [title]="article.title"
   (click)="set(article.id)"
+  aria-hidden="true"
 >
-  <div class="w-[50%] sm:py-5 sm:justify-around py-2 px-5 relative flex flex-col justify-center text-gray-900">
+  <div
+    class="w-[50%] sm:py-5 sm:justify-around py-2 px-5 relative flex flex-col justify-center text-gray-900"
+  >
     <div class="font-normal text-xl">
-      {{index | number : '2.0-0'}}
-      <hr>
+      {{ index | number : "2.0-0" }}
+      <hr />
     </div>
     <div class="text-xs sm:text-lg lg:text-xl font-semibold">
-      {{article.title}}
+      {{ article.title }}
     </div>
     <div class="justify-between hidden sm:flex w-full flex-col">
       <div class="tracking-[1px] text-sm font-normal flex">
         <span class="text-gray-400 mr-1">Escrito por</span>
-        <a class="text-blue-500 hover:text-blue-700" [href]="'mailto://'+article.Author.email">{{article.Author.full_name}}</a>
+        <a
+          class="text-blue-500 hover:text-blue-700"
+          [href]="'mailto://' + article.Author.email"
+          >{{ article.Author.full_name }}</a
+        >
       </div>
       <div class="flex tracking-[1px] text-xs font-normal">
-          <span class="text-gray-400 mr-1">Publicado em </span>
-          <span class="text-gray-800" href="#">{{ formatDateCreated() }}</span>
+        <span class="text-gray-400 mr-1">Publicado em </span>
+        <span class="text-gray-800" href="#">{{ formatDateCreated() }}</span>
       </div>
     </div>
   </div>
   <div
     class="rounded-r-md w-[50%] aspect-square bg-no-repeat bg-cover bg-center bg-[url('/assets/default.png')]"
     [ngStyle]="{
-      'background-image':
-        'url(' + thumb(article) +')'
+      'background-image': 'url(' + thumb(article) + ')'
     }"
   ></div>
 </article>

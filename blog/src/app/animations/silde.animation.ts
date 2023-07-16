@@ -1,6 +1,6 @@
-import { animate, animateChild, group, query, state, style, transition, trigger } from "@angular/animations";
+import { AnimationTriggerMetadata, animate, query, style, transition, trigger } from "@angular/animations";
 
-export const slide: any = trigger('slide', [
+export const slide: AnimationTriggerMetadata = trigger('slide', [
   transition('* => *', [
     query(':enter', [
       style({transformOrigin: 'top left',transform: 'scaleX(0)', opacity: '0'}),

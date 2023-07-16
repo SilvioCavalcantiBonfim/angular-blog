@@ -5,5 +5,5 @@ import { Component, Input } from '@angular/core';
   templateUrl: './navegation.component.html',
 })
 export class NavegationComponent {
-  @Input() title: string = 'Dashboard';
+  @Input() title = 'Dashboard';
 }

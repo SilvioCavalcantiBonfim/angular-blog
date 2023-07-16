@@ -12,7 +12,7 @@ import { thumb } from 'src/app/factories/thumb.factory';
 export class PostComponent {
   data = new Date();
   @Input() article!: Article;
-  @Input() index: number = 0;
+  @Input() index = 0;
 
   constructor(private router: Router) {}
 

@@ -9,5 +9,4 @@ export class AnimationComponent {
   options: AnimationOptions = {
     path: '/assets/blog.json',
   };
-
 }

@@ -1,6 +1,6 @@
-import { animate, state, style, transition, trigger } from "@angular/animations";
+import { AnimationTriggerMetadata, animate, state, style, transition, trigger } from "@angular/animations";
 
-export const shakeHorizontal = trigger('shakeHorizontal', [
+export const shakeHorizontal: AnimationTriggerMetadata = trigger('shakeHorizontal', [
   state('false', style({
     transform: 'translate(0)'
   })),

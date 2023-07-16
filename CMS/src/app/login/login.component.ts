@@ -9,30 +9,32 @@ import { AlertComponent } from './alert/alert.component';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-
   @ViewChild('email') inputEmail: InputComponent | undefined;
   @ViewChild('password') inputPassword: InputComponent | undefined;
   @ViewChild('alert') alert: AlertComponent | undefined;
-  
-  loginForm = new FormGroup(
-    {
-      email: new FormControl('', [Validators.email, Validators.required]),
-      password: new FormControl('', [Validators.minLength(5), Validators.required]),
-    }
-  );
 
-  constructor(private api: APICommunicationService) {}
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.email, Validators.required]),
+    password: new FormControl('', [
+      Validators.minLength(5),
+      Validators.required,
+    ]),
+  });
+
+  constructor(private api: APICommunicationService) {
+    document.title = 'CMS | Login';
+  }
 
   onSubmit() {
-    if(this.loginForm.status === 'VALID'){
+    if (this.loginForm.status === 'VALID') {
       this.api.Auth(
         String(this.loginForm.get('email')?.value),
         String(this.loginForm.get('password')?.value),
-        (err: any) => {
+        () => {
           this.alert?.show();
-        }
+        },
       );
-    }else{
+    } else {
       this.inputEmail?.start();
       this.inputPassword?.start();
     }

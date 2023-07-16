@@ -14,13 +14,13 @@ import { AlertComponent } from './alert/alert.component';
     LoginComponent,
     InputComponent,
     AnimationComponent,
-    AlertComponent
+    AlertComponent,
   ],
   imports: [
     CommonModule,
     LoginRoutingModule,
     ReactiveFormsModule,
-    LottieModule
-  ]
+    LottieModule,
+  ],
 })
-export class LoginModule { }
+export class LoginModule {}

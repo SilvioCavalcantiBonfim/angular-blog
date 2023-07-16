@@ -1,5 +1,6 @@
 <header
   class="select-none bg-white bg-opacity-70 drop-shadow-md w-full z-50"
+  aria-hidden="true"
   *ngIf="settingsService.Settings | async as settings"
 >
   <nav
@@ -9,7 +10,7 @@
     }"
   >
     <a
-      (click)="router.navigate(['/'])"
+      (click)="onClick()"
       class="cursor-pointer justify-self-center px-2 md:justify-self-start items-center flex justify-center text-black text-opacity-80"
     >
       <app-logo [color]="settings.theme[0]" />
@@ -55,11 +56,13 @@
       class="w-full flex justify-end px-2 fixed right-5 top-[calc(45px+1.25rem-22px)] md:static"
     >
       <a
-        (click)="router.navigate(['/'])"
+        (click)="onClick()"
         [ngStyle]="{
           'background-color': settings.theme[1 - hover]
         }"
+        #homeButton
         (mouseover)="hover = 1"
+        (focus)="homeButton.blur()"
         (mouseleave)="hover = 0"
         class="cursor-pointer drop-shadow-lg transition-all text-white hover:text-white w-10 flex items-center justify-center rounded-full aspect-square scale-110 bg-gray-200 hover:bg-gray-50"
       >

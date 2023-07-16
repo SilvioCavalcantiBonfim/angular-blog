@@ -1,11 +1,11 @@
 
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { slide } from 'src/app/animations/silde.animation';
 import { Article } from 'src/app/entity/article.type';
 import * as thumbFactory from 'src/app/factories/thumb.factory';
 import { ApiService } from '../services/api.service';
 import { SettingsService } from '../services/settings.service';
-import { Observable, ReplaySubject, Subject, Subscription, interval, map, switchMap, takeUntil, tap, timer, withLatestFrom } from 'rxjs';
+import { ReplaySubject, Subscription, interval, map, withLatestFrom } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({

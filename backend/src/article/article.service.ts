@@ -108,7 +108,7 @@ export class ArticleService {
             select: {
               id: false,
               password: false,
-              email: false,
+              email: true,
               full_name: true,
             },
           },
@@ -140,6 +140,9 @@ export class ArticleService {
       },
       where: {
         title: {
+          contains: search,
+        },
+        content: {
           contains: search,
         },
       },

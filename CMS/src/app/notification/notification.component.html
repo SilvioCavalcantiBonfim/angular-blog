@@ -1,7 +1,9 @@
-<div class="fixed z-50 bottom-0 sm:bottom-3 right-0 sm:right-3 text-black flex flex-col gap-2">
-  <app-notification-container 
-    [notification]="notification" 
-    (callback)="notificationService.remove($event)" 
+<div
+  class="fixed z-50 bottom-0 sm:bottom-3 right-0 sm:right-3 text-black flex flex-col gap-2"
+>
+  <app-notification-container
+    [notification]="notification"
+    (callback)="notificationService.remove($event)"
     *ngFor="let notification of notificationService.notifications"
   />
 </div>

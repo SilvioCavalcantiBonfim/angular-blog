@@ -25,7 +25,7 @@ import { SettingEditorComponent } from './settings-editor/setting-editor.compone
     TileEmptyComponent,
     ProfileEditorComponent,
     NavegationComponent,
-    SettingEditorComponent
+    SettingEditorComponent,
   ],
   imports: [
     CommonModule,
@@ -33,7 +33,7 @@ import { SettingEditorComponent } from './settings-editor/setting-editor.compone
     EditorModule,
     ReactiveFormsModule,
     FormsModule,
-    NotificationModule
-  ]
+    NotificationModule,
+  ],
 })
-export class DashboardModule { }
+export class DashboardModule {}

@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Observable, ReplaySubject, Subscription, filter, tap } from 'rxjs';
+import { Observable, ReplaySubject, Subscription, filter } from 'rxjs';
 import { Article } from '../entity/article.type';
 import { ApiService } from './api.service';
 
@@ -20,8 +20,8 @@ export class SearchService implements OnDestroy{
     }));
   }
 
-  registerEvent($event: Observable<string>, preaction: (() => void) = () => {}) {
-    this.sub$.add($event.pipe(tap(preaction)).subscribe(this.search$));
+  registerEvent($event: Observable<string>) {
+    this.sub$.add($event.subscribe(this.search$));
   }
 
   get search() {

@@ -1,13 +1,13 @@
 export type Setting = {
-  title: string,
-  subtitle: string,
-  theme: string[],
+  title: string;
+  subtitle: string;
+  theme: string[];
   carousel: {
-    amount: number,
-    time: number
-  },
+    amount: number;
+    time: number;
+  };
   articles: {
-    total: number,
-    per_page: number
-  }
-}
+    total: number;
+    per_page: number;
+  };
+};

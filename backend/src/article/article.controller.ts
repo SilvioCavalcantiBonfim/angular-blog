@@ -6,6 +6,7 @@ import {
   HttpCode,
   Param,
   Post,
+  Put,
   Query,
   Request,
   UseGuards,
@@ -30,7 +31,7 @@ export class ArticleController {
     return this.articleService.delete(id, res.user.sub);
   }
 
-  @Post('update/:id')
+  @Put('update/:id')
   @UseGuards(AuthGuard)
   update(@Body() data: ArticleDto, @Param('id') id: string, @Request() res) {
     return this.articleService.update(data, id, res.user.sub);

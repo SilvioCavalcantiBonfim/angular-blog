@@ -3,5 +3,6 @@ export type Comment = {
   article_id: string,
   content: string,
   author: string,
+  email?: string,
   created_at: string
 }

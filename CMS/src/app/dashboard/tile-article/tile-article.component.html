@@ -1,31 +1,47 @@
-  <div
-    class="flex h-full justify-between sm:h-auto flex-col gap-x-6 p-5 cursor-pointer hover:drop-shadow-xl drop-shadow-md transition-all rounded bg-white border-0 border-gray-800"
-    [ngClass]="{
-      'border-l-8': active === data.id
-    }"
-    (click)="SetId.emit(data.id)"
-  >
-    <div class="flex justify-between">
-      <p class="text-base font-semibold leading-6 text-gray-800">{{data.title}}</p>
-      <p 
-        class="text-sm leading-3 relative" 
-        [title]="(data.comments.length > 0)?'Você tem '+data.comments.length+' comentario(s) nesse artigo':'Não a comentarios nesse artigo'"
-        [ngClass]="(data.comments.length > 0)?'text-gray-800':'text-gray-500'"
-      >
-        <button 
+<div
+  class="flex h-full justify-between sm:h-auto flex-col gap-x-6 p-5 cursor-pointer hover:drop-shadow-xl drop-shadow-md transition-all rounded bg-white border-0 border-gray-800"
+  [ngClass]="{
+    'border-l-8': active === data.id
+  }"
+  (click)="EmitterId.emit(data.id)"
+  aria-hidden="true"
+>
+  <div class="flex justify-between">
+    <p class="text-base font-semibold leading-6 text-gray-800">
+      {{ data.title }}
+    </p>
+    <p
+      class="text-sm leading-3 relative"
+      [title]="
+        data.comments.length > 0
+          ? 'Você tem ' + data.comments.length + ' comentario(s) nesse artigo'
+          : 'Não a comentarios nesse artigo'
+      "
+      [ngClass]="data.comments.length > 0 ? 'text-gray-800' : 'text-gray-500'"
+    >
+      <button
         class="bg-transparent hover:bg-gray-100 p-2 rounded-full flex justify-center items-center"
-        (click)="commentButton.emit($event)"
-        >
-          <span class="material-symbols-outlined">comment</span>
-        </button>
-        <span *ngIf="data.comments.length > 0" class="absolute bg-red-600 text-white py-[1px] px-[5px] text-xs rounded-full top-[-2px] right-[-2px]">
-          {{data.comments.length}}
-        </span>
-      </p>
-    </div>
-
-    <div class="flex justify-between gap-4">
-      <p class="mt-1 truncate text-xs leading-5 text-left text-gray-500" [innerHTML]="formatDateCreated()"></p>
-      <p class="mt-1 truncate text-xs leading-5 text-right text-gray-500"[innerHTML]="formatDateUpdate()"></p>
-    </div>
+        (click)="ClickCommentButton.emit($event)"
+      >
+        <span class="material-symbols-outlined">comment</span>
+      </button>
+      <span
+        *ngIf="data.comments.length > 0"
+        class="absolute bg-red-600 text-white py-[1px] px-[5px] text-xs rounded-full top-[-2px] right-[-2px]"
+      >
+        {{ data.comments.length }}
+      </span>
+    </p>
   </div>
+
+  <div class="flex justify-between gap-4">
+    <p
+      class="mt-1 truncate text-xs leading-5 text-left text-gray-500"
+      [innerHTML]="formatDateCreated()"
+    ></p>
+    <p
+      class="mt-1 truncate text-xs leading-5 text-right text-gray-500"
+      [innerHTML]="formatDateUpdate()"
+    ></p>
+  </div>
+</div>

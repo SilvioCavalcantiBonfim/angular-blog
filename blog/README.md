@@ -1,27 +1,60 @@
-# Blog
+# Frontend do Sistema de Blog em Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.1.
+![Typescript](https://img.shields.io/badge/-TypeScript-white?style=for-the-badge&logo=typescript&color=3178C6&logoColor=white)
+![angular](https://img.shields.io/badge/-angular-white?style=for-the-badge&logo=angular&color=DD0031&logoColor=white)
+![tailwindcss](https://img.shields.io/badge/-tailwind_css-white?style=for-the-badge&logo=tailwindcss&color=06B6D4&logoColor=white)
+![lottie](https://img.shields.io/badge/-Lottie-white?style=for-the-badge&color=08ccbc&logoColor=white)
 
-## Development server
+Este é o projeto de frontend em Angular para um sistema de blog. O objetivo deste projeto é fornecer uma interface de usuário amigável e responsiva para visualizar e interagir com os posts do blog.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Configuração do Ambiente
 
-## Code scaffolding
+Certifique-se de ter o Node.js e o Angular CLI instalados em sua máquina.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Clone este repositório para sua máquina local.
+2. Na raiz do projeto, execute `npm install` para instalar as dependências.
+3. Execute `ng serve` para iniciar o servidor de desenvolvimento.
+4. Acesse o aplicativo em seu navegador em `http://localhost:4200`.
 
-## Build
+## Estrutura do Projeto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- `src`: Contém o código-fonte principal do projeto.
+  - `app`: Pasta para armazenar os componentes e serviços do aplicativo.
+    - `animations`: Pata para armazenar as animações angular.
+    - `article`: Pasta para armazenar o modulo article da rota `/article/:id`.
+    - `carousel`: Pasta para armazenar o modulo carousel e seus componentes.
+    - `entity`: Pasta para armazenar os tipos.
+    - `factories`: Pasta para armazenar as factories.
+    - `main`: Pasta para armazenar o modulo main da rota `/`.
+    - `pieces`: Pasta para armazenar o modulo pieces que exporta os componentes `app-header` e `app-footer`.
+    - `services`: Pasta para armazenar os serviços de comunicação com a API do backend, gerenciamento de artigos, configurações e buscas.
+    - `terms-and-condition`: Pasta para armazenar os modelos de terms-and-condition da rota `/terms-and-condition`.
+    - `app.component.ts`: Arquivo do componente principal do aplicativo.
+    - `app.module.ts`: Arquivo de configuração do módulo principal do aplicativo.
+  - `assets`: Pasta para armazenar os recursos estáticos, como imagens e arquivos CSS.
 
-## Running unit tests
+## Funcionalidades
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Visualizar lista de artigos do blog.
+- Visualizar detalhes de um artigo específico.
+- Comentar em um artigo.
+- Pesquisar artigos por título ou conteúdo.
+- Paginação para navegar pelos posts.
 
-## Running end-to-end tests
+## Tecnologias Utilizadas
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Angular: Framework JavaScript para construção de interfaces de usuário.
+- Angular Router: Gerenciador de rotas para navegação no aplicativo.
+- HttpClientModule: Módulo para realizar requisições HTTP para a API do backend.
+- BrowserAnimationsModule: Biblioteca para animações no Angular.
+- LottieModule: Módulo para exibir animações do Lottie em projetos Angular.
+- Tailwind CSS: Framework CSS utilitário para estilização rápida e responsiva.
+- TypeScript: Superset do JavaScript utilizado no desenvolvimento Angular.
 
-## Further help
+## Contribuição
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Contribuições são bem-vindas! Se você tiver sugestões, melhorias ou correções, sinta-se à vontade para abrir uma issue ou enviar um pull request.
+
+## Licença
+
+Este projeto está licenciado sob a licença [MIT](LICENSE).

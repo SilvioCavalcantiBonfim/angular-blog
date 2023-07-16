@@ -1,27 +1,38 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 
-interface Action { [key: string]: any };
+interface Action {
+  [key: string]: (obj: PermissionService) => boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree>;
+}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PermissionService implements CanActivate {
-
-  constructor(private cookie: CookieService, private router: Router) { }
-
+  constructor(
+    private cookie: CookieService,
+    private router: Router,
+  ) {
+    console.log(typeof this.actions['login'])
+  }
 
   actions: Action = {
     login(obj: PermissionService) {
-      if(obj.isLogged()){
+      if (obj.isLogged()) {
         obj.router.navigate(['/dashboard']);
       }
       return !obj.isLogged();
     },
     dashboard(obj: PermissionService) {
-      if(!obj.isLogged()){
+      if (!obj.isLogged()) {
         obj.router.navigate(['/login']);
       }
       return obj.isLogged();
@@ -37,14 +48,19 @@ export class PermissionService implements CanActivate {
     this.cookie.delete('access_token');
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+  ):
+    | boolean
+    | UrlTree
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree> {
     const currentRoute = state.url.substring(1);
 
     const action = this.actions[currentRoute];
-    
-    if(action)
-      return action(this);
+
+    if (action) return action(this);
 
     return true;
   }

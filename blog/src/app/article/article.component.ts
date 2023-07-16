@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ReplaySubject, forkJoin, map, switchMap, take, takeLast, tap, withLatestFrom } from 'rxjs';
-import { Article } from '../entity/article.type';
+import { ReplaySubject, switchMap, take, withLatestFrom } from 'rxjs';
 import { FullArticle } from '../entity/fullArticle.type';
 import { ApiService } from '../services/api.service';
 import { thumb } from '../factories/thumb.factory';
 import { formatDateCreated } from '../factories/formatDateCreated.factory';
 import { SettingsService } from '../services/settings.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-article',
@@ -36,7 +35,7 @@ export class ArticleComponent {
   }
   
   private loadArticle() {
-    this.route.params.pipe(switchMap((v) => this.api.getFullArticle(v['id'])), take(1)).subscribe({next: e => this.article$.next(e), complete: () => {console.log('complete')}});
+    this.route.params.pipe(switchMap((v) => this.api.getFullArticle(v['id'])), take(1)).subscribe({next: e => this.article$.next(e)});
   }
 
   thumb(article: FullArticle) {

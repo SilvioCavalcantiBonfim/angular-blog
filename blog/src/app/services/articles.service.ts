@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { ApiService } from './api.service';
-import { BehaviorSubject, Observable, ReplaySubject, Subscription, delay, filter, switchMap, tap, withLatestFrom } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subscription, filter, tap, withLatestFrom } from 'rxjs';
 import { Article } from '../entity/article.type';
 import { SettingsService } from './settings.service';
 import { SearchService } from './search.service';
@@ -34,7 +34,7 @@ export class ArticlesService implements OnDestroy {
     this.totalArticles$.next(1);
   }
   
-  registerEvent($event: Observable<any>) {
+  registerEvent($event: Observable<Event>) {
     this.sub$.add(
       $event.pipe(
         withLatestFrom(this.totalArticles$, this.settingsService.Settings),

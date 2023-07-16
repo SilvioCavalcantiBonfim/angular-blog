@@ -5,6 +5,6 @@ import { Component, Input } from '@angular/core';
   templateUrl: './logo.component.html',
 })
 export class LogoComponent {
-  @Input() color: string = '#F88669';
-  @Input() size: number = 90;
+  @Input() color = '#F88669';
+  @Input() size = 90;
 }

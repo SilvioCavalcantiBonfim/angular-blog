@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Setting } from '../entity/setting.type';
+import { Settings } from '../entity/setting.type';
 import { Article } from '../entity/article.type';
 import { FullArticle } from '../entity/fullArticle.type';
 import { Comment } from '../entity/comment.type';
@@ -9,12 +9,12 @@ import { Comment } from '../entity/comment.type';
   providedIn: 'root'
 })
 export class ApiService {
-  private endpoint: string = 'http://localhost:3000';
+  private endpoint = import.meta.env['NG_APP_ENDPOINT'];
 
   constructor(private http: HttpClient) { }
 
   getSettings() {
-    return this.http.get<Setting>(`${this.endpoint}/setting`);
+    return this.http.get<Settings>(`${this.endpoint}/setting`);
   }
 
   getArticles(take: number, skip: number) {

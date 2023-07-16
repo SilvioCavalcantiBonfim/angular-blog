@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Put, UseGuards } from '@nestjs/common';
 import { SettingDto } from './setting.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { SettingService } from './setting.service';
@@ -13,7 +13,7 @@ export class SettingController {
   }
 
   @UseGuards(AuthGuard)
-  @Post()
+  @Put()
   setSetting(@Body() setting: SettingDto) {
     return this.settingService.setSettings(setting);
   }

@@ -2,13 +2,13 @@
   <div class="flex">
     <div class="mr-3 border-r border-gray-400 pr-3">
       <p class="text-gray-200 text-end text-sm capitalize">
-        {{profile.full_name}}
+        {{ profile.full_name }}
       </p>
       <p class="text-gray-400 text-xs">
-        {{profile.email}}
+        {{ profile.email }}
       </p>
     </div>
-    
+
     <button
       (click)="dorpdownstate = !dorpdownstate"
       #dropdownButton
@@ -18,17 +18,20 @@
       aria-expanded="false"
       aria-haspopup="true"
     >
-      <div class="h-9 w-9 rounded-full bg-indigo-500 text-white flex items-center justify-center">
-        <span class="text-base font-semibold">{{profile.full_name && profile.full_name[0].toUpperCase()}}</span>
+      <div
+        class="h-9 w-9 rounded-full bg-indigo-500 text-white flex items-center justify-center"
+      >
+        <span class="text-base font-semibold">{{
+          profile.full_name && profile.full_name[0].toUpperCase()
+        }}</span>
       </div>
     </button>
-    <div>
-    </div>
+    <div></div>
   </div>
   <div
     *ngIf="dorpdownstate"
     [@fade]="dorpdownstate"
-    style="z-index: 10000;"
+    style="z-index: 10000"
     class="absolute right-0 mt-2 z-50 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
     role="menu"
     aria-orientation="vertical"
@@ -42,7 +45,9 @@
       tabindex="-1"
       id="user-menu-item-2"
       (click)="action.action()"
-      ><span class="material-symbols-outlined mr-2">{{action.icon}}</span> {{action.title}}</a
+      aria-hidden="true"
+      ><span class="material-symbols-outlined mr-2">{{ action.icon }}</span>
+      {{ action.title }}</a
     >
   </div>
 </div>
@@ -56,6 +61,8 @@
       tabindex="-1"
       id="user-menu-item-2"
       (click)="action.action()"
-      ><span class="material-symbols-outlined mr-2">{{action.icon}}</span></a
+      aria-hidden="true"
+      ><span class="material-symbols-outlined mr-2">{{ action.icon }}</span></a
     >
+  </div>
 </div>

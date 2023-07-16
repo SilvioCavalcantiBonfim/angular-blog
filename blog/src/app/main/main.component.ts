@@ -15,7 +15,7 @@ export class MainComponent{
       fromEvent(window, 'scroll')
         .pipe(
           debounceTime(200),
-          filter((_) => {
+          filter(() => {
             const wHeight = window.innerHeight;
             const dHeight = document.documentElement.scrollHeight;
             const tScroll = window.scrollY;

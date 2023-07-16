@@ -1,15 +1,25 @@
-import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { Editor, Toolbar, toHTML } from 'ngx-editor';
-import { BehaviorSubject, ReplaySubject, combineLatest, concat, forkJoin, map, merge, zip } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  map,
+} from 'rxjs';
 import { InputInit } from '../entity/initInput.interface';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-editor',
-  templateUrl: './editor.component.html'
+  templateUrl: './editor.component.html',
 })
 export class EditorComponent implements OnInit, OnDestroy, OnChanges {
-
   @Input() init!: InputInit;
 
   titleGroup!: FormGroup;
@@ -17,16 +27,23 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
   editor!: Editor;
 
   toolbar: Toolbar = [
-    ['bold', 'italic','underline', 'strike'],
+    ['bold', 'italic'],
+    ['underline', 'strike'],
     ['code', 'blockquote'],
-    ['text_color', 'background_color'],
     ['ordered_list', 'bullet_list'],
-    [{ heading: ['h1', 'h2', 'h3'] }],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
     ['horizontal_rule', 'format_clear'],
   ];
 
-  update: BehaviorSubject<InputInit> = new BehaviorSubject<InputInit>({id: null, title: '', thumb: '', content: ''});
+  update: BehaviorSubject<InputInit> = new BehaviorSubject<InputInit>({
+    id: null,
+    title: '',
+    thumb: '',
+    content: '',
+  });
 
   editor$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
@@ -35,27 +52,31 @@ export class EditorComponent implements OnInit, OnDestroy, OnChanges {
       title: new FormControl(''),
       thumb: new FormControl(''),
     });
-    combineLatest(
-      [this.titleGroup.valueChanges, this.editor$.asObservable()]
-    ).pipe(map((e) => ({...e[0], content: e[1]}))).subscribe(this.update)
+    combineLatest([this.titleGroup.valueChanges, this.editor$.asObservable()])
+      .pipe(map((e) => ({ ...e[0], content: e[1] })))
+      .subscribe(this.update);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes['init']){
+    if (changes['init']) {
       const previewProps = changes['init'].previousValue;
-      if(this.init.content !== previewProps?.content && this.init.content !== undefined){
-          this.editor.setContent(this.init.content);
+      if (
+        this.init.content !== previewProps?.content &&
+        this.init.content !== undefined
+      ) {
+        this.editor.setContent(this.init.content);
       }
     }
   }
 
   ngOnInit(): void {
     this.editor = new Editor();
-    this.editor.valueChanges.pipe(map(r => toHTML(r))).subscribe(this.editor$)
+    this.editor.valueChanges
+      .pipe(map((r) => toHTML(r)))
+      .subscribe(this.editor$);
   }
 
   ngOnDestroy(): void {
     this.editor?.destroy();
   }
-
 }

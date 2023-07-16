@@ -13,7 +13,7 @@ import { Settings } from 'src/app/entity/setting.type';
 export class CommentSubmitComponent {
 
   @Input() settings!: Settings;
-  @Output() onSubmit: EventEmitter<{ content: string, author: string }> = new EventEmitter<{ content: string, author: string }>();
+  @Output() formSubmit: EventEmitter<{ content: string, author: string }> = new EventEmitter<{ content: string, author: string }>();
 
   validateContent$: ReplaySubject<boolean> = new ReplaySubject<boolean>();
   validateAccept$: ReplaySubject<boolean> = new ReplaySubject<boolean>();
@@ -39,9 +39,9 @@ export class CommentSubmitComponent {
     this.validateContent$.next(this.control.content.status === 'INVALID');
     this.validateAccept$.next(this.control.accept.status === 'INVALID');
     if (this.commentForm.valid && this.control.content.value !== null && this.control.author.value !== null) {
-      let content: string = this.control.content.value;
-      let author: string = (this.control.author.value.length > 0)? this.control.author.value: 'Anônimo';
-      this.onSubmit.emit({ content, author });
+      const content: string = this.control.content.value;
+      const author: string = (this.control.author.value.length > 0)? this.control.author.value: 'Anônimo';
+      this.formSubmit.emit({ content, author });
       this.commentForm.reset();
     }
   }

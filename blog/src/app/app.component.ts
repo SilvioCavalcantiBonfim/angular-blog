@@ -12,7 +12,10 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('search') search: ElementRef | undefined;
 
   constructor(private settingsService: SettingsService, private searchService: SearchService) {
-    this.settingsService.Settings.subscribe((settings) => document.body.style.backgroundImage = `linear-gradient(to right, ${settings.theme[0]}, ${settings.theme[1]})`);
+    this.settingsService.Settings.subscribe((settings) => {
+      document.body.style.backgroundImage = `linear-gradient(to right, ${settings.theme[0]}, ${settings.theme[1]})`;
+      document.title = settings.title;
+    });
   }
   ngAfterViewInit(): void {
     if (this.search) {
