@@ -104,12 +104,14 @@ export class DashboardComponent implements AfterViewInit {
       error: () => this.permissions.logout(),
     });
     apiCommunication.getSettings().subscribe({
-      next: (r) => (this.settings = r),
-      error: () => this.permissions.logout(),
-      complete: () => document.title = `CMS | ${this.settings.title}`
+      next: (r) => {
+        this.settings = r;
+        document.title = `CMS | ${r.title}`;
+      },
+      error: () => this.permissions.logout()
     });
   }
-
+  
   ngAfterViewInit(): void {
     this.EmitterId(null);
   }
