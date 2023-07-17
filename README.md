@@ -50,7 +50,7 @@ Após a execução do comando `docker compose up`, a demo estará disponível no
 - Moderação de comentários.
 - Personalização do layout e estilo do blog.
 
-
+![Design sem nome](https://raw.githubusercontent.com/SilvioCavalcantiBonfim/angular-blog/master/images/cms.gif)
 
 ### Backend em Nest.js
 
