@@ -34,6 +34,9 @@ Após a execução do comando `docker compose up`, a demo estará disponível no
 - [backend](./backend/README.md): Contém o código-fonte e as instruções para o backend em Nest.js.
 - O arquivo `init.db` no diretório `.docker/mysql` é uma base de dados inicial para o sistema.
 
+![docker](https://github.com/SilvioCavalcantiBonfim/angular-blog/assets/89864715/5539368f-372d-4915-962a-ebba262df8ba)
+
+
 ## Recursos e Funcionalidades
 
 ### Blog em Angular
