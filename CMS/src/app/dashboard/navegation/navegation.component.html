@@ -1,18 +1,14 @@
-<nav class="bg-gray-800 drop-shadow-xl">
+<nav class="bg-gray-800 drop-shadow-xl  h-auto">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="flex h-16 items-center justify-between">
+    <div class="sm:flex grid grid-cols-1 h-[76px] sm:h-16 items-center justify-between">
       <div class="flex items-center">
-        <div class="flex-shrink-0">
           <h1 class="text-3xl capitalize font-bold tracking-tight text-white">
             {{ title }}
           </h1>
-        </div>
       </div>
-      <div>
-        <div class="ml-4 flex items-center md:ml-6">
-          <ng-content></ng-content>
-        </div>
-      </div>
+      <div class="flex justify-self-end items-center md:ml-6">
+        <ng-content></ng-content>
+      </div>  
     </div>
   </div>
 </nav>
