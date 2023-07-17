@@ -20,8 +20,7 @@ export class MainComponent{
             const dHeight = document.documentElement.scrollHeight;
             const tScroll = window.scrollY;
             return tScroll >= (dHeight - wHeight);
-          }
-          )
+          })
         )
     );
   }

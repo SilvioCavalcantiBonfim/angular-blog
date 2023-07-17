@@ -15,12 +15,13 @@ export class ArticlesService implements OnDestroy {
   private loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private totalArticles$: ReplaySubject<number> = new ReplaySubject<number>();
   private articles$: ReplaySubject<Article[]> = new ReplaySubject<Article[]>();
-  
+
   constructor(private api: ApiService, private settingsService: SettingsService, private searchService: SearchService) {
-    
     this.totalArticles$.next(1);
     this.articles$.next([]);
-    
+  }
+
+  registerEvent($event: Observable<Event>) {
     this.sub$.add(this.totalArticles$.pipe(
       filter(v => v > 0),
       withLatestFrom(this.articles$, this.settingsService.Settings),
@@ -33,29 +34,24 @@ export class ArticlesService implements OnDestroy {
           complete: () => this.loading$.next(false)
         })
     }));
-    
-  }
-  
-  registerEvent($event: Observable<Event>) {
     this.sub$.add(
       $event.pipe(
         withLatestFrom(this.totalArticles$, this.settingsService.Settings),
-        filter((v) => v[1] <=  Math.floor(v[2].articles.total / v[2].articles.per_page)),
-        )
+        filter((v) => v[1] <= Math.floor(v[2].articles.total / v[2].articles.per_page)),
+      )
         .subscribe(v => this.totalArticles$.next(v[1] + 1))
-        );
-      }
-      
-      get articles(): Observable<Article[]> {
-        return this.articles$.asObservable();
-      }
-      
-      get loading(): Observable<boolean> {
-        return this.loading$.asObservable();
-      }
-      
-      ngOnDestroy(): void {
-        this.sub$.unsubscribe();
-      }
-    }
-    
+    );
+  }
+
+  get articles(): Observable<Article[]> {
+    return this.articles$.asObservable();
+  }
+
+  get loading(): Observable<boolean> {
+    return this.loading$.asObservable();
+  }
+
+  ngOnDestroy(): void {
+    this.sub$.unsubscribe();
+  }
+}
