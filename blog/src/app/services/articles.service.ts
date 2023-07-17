@@ -15,13 +15,17 @@ export class ArticlesService implements OnDestroy {
   private loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private totalArticles$: ReplaySubject<number> = new ReplaySubject<number>();
   private articles$: ReplaySubject<Article[]> = new ReplaySubject<Article[]>();
-
+  
   constructor(private api: ApiService, private settingsService: SettingsService, private searchService: SearchService) {
-
+    
+    this.totalArticles$.next(1);
+    this.articles$.next([]);
+    
     this.sub$.add(this.totalArticles$.pipe(
       filter(v => v > 0),
       withLatestFrom(this.articles$, this.settingsService.Settings),
-      tap(() => this.loading$.next(true))
+      tap(() => this.loading$.next(true)),
+      tap(console.log)
     ).subscribe((v) => {
       this.api.getArticles(v[2].articles.per_page, (v[0] - 1) * v[2].articles.per_page)
         .subscribe({
@@ -30,8 +34,6 @@ export class ArticlesService implements OnDestroy {
         })
     }));
     
-    this.articles$.next([]);
-    this.totalArticles$.next(1);
   }
   
   registerEvent($event: Observable<Event>) {

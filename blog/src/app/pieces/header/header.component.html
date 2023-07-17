@@ -1,5 +1,5 @@
 <header
-  class="select-none bg-white bg-opacity-70 drop-shadow-md w-full z-50"
+  class="select-none bg-white bg-opacity-70 drop-shadow-md w-full z-50 relative"
   aria-hidden="true"
   *ngIf="settingsService.Settings | async as settings"
 >
@@ -53,12 +53,12 @@
   </nav>
   <ng-template #homeButton>
     <div
-      class="w-full flex justify-end px-2 fixed right-5 top-[calc(45px+1.25rem-22px)] md:static"
+      class="w-full flex justify-end px-2 fixed right-5 md:static"
     >
       <a
         (click)="onClick()"
         [ngStyle]="{
-          'background-color': settings.theme[1 - hover]
+          'background-color': settings.theme[hover]
         }"
         #homeButton
         (mouseover)="hover = 1"
