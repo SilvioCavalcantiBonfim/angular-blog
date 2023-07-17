@@ -43,14 +43,14 @@ Após a execução do comando `docker compose up`, a demo estará disponível no
 - Página de detalhes do artigo com conteúdo completo, informações adicionais e seção de comentários.
 - Páginas de pesquisa e filtragem para encontrar posts específicos.
 
-![Design sem nome (1)]()
+![Design sem nome](https://raw.githubusercontent.com/SilvioCavalcantiBonfim/angular-blog/master/images/blog.gif)
 
 ### CMS
 - Gerenciamento de artigos: criação, edição e exclusão de artigos.
 - Moderação de comentários.
 - Personalização do layout e estilo do blog.
 
-![Design sem nome](https://raw.githubusercontent.com/SilvioCavalcantiBonfim/angular-blog/master/images/blog.gif)
+
 
 ### Backend em Nest.js
 
