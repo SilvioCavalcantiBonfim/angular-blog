@@ -53,7 +53,7 @@ Certifique-se de ter o Node.js e o Angular CLI instalados em sua máquina.
 
 ## Capturas de telas
 
-![Design sem nome (1)](https://github.com/SilvioCavalcantiBonfim/angular-blog/assets/89864715/572a077d-8c2e-4d40-b61f-3cecb9397228)
+![Design sem nome](https://raw.githubusercontent.com/SilvioCavalcantiBonfim/angular-blog/master/images/blog.gif)
 
 ## Contribuição
 
