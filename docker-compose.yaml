@@ -45,15 +45,5 @@ services:
     networks:
       - networkApplication
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
-    networks:
-      - networkApplication
-    depends_on:
-      - db
-
 networks:
   networkApplication:
